@@ -1,0 +1,12 @@
+#post_content
+	%h1= @course.course_name
+	#comments
+		//%h3 Add new Event
+		//= render "events/form"
+		//new_course_event_path(@course)
+		%h3= link_to "Add a new Event", new_course_event_path(@course)
+		= render @course.events
+
+	//= link_to "Edit", edit_course_path(@course), class: "button"
+	//= link_to "Delete", course_path(@course), method: :delete, data: { confirm: "Are you sure you want to do this?" }, class: "button"
+	= link_to "All events", course_events_path(@course.id)

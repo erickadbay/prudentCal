@@ -1,0 +1,7 @@
+%h1= @course.course_name
+= link_to "New Event", new_course_event_path
+- @event.each do |event|
+    %h2= link_to event.title, course_event_path(event.course_id, event.id)
+    %p= event.event_date
+    %p= event.start_time
+    %p= event.end_time
