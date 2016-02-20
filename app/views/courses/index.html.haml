@@ -1,2 +1,4 @@
-- @course.each do |course|
-    %h2= link_to course.course_name,course_events_path(course.id)
+#courses
+    - @course.each do |course|
+        .course
+            %h1= link_to course.course_name,course_events_path(course.id)

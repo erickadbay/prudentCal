@@ -1,8 +1,8 @@
 class EventsController < ApplicationController
     before_action :find_course, only: [:show,:index, :create, :edit, :update, :destroy]
     def index
-        @event=Event.where(:course_id => @course.id).order(event_date: :asc)
-        #@event=Event.all.order(event_date: :asc)
+        #@event=Event.where(:course_id => @course.id).order(event_date: :asc)
+        @event=Event.all.order(event_date: :asc)
     end
 
     def show
