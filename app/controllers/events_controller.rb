@@ -1,12 +1,12 @@
 class EventsController < ApplicationController
     before_action :find_course, only: [:show,:index, :create, :edit, :update, :destroy]
+    before_action :find_event, only: [:show, :edit, :update]
     def index
         #@event=Event.where(:course_id => @course.id).order(event_date: :asc)
         @event=Event.all.order(event_date: :asc)
     end
 
     def show
-        @event=Event.find(params[:id])
     end
 
     def new
@@ -26,12 +26,11 @@ class EventsController < ApplicationController
     end
 
     def edit
-        @event=Event.find(params[:id])
     end
 
     def update
         if @event.update(event_params)
-            redirect_to course_events_path(@course.id)
+            redirect_to course_event_path(@course.id, @event.id)
         else
             render 'edit'
         end
@@ -46,6 +45,10 @@ class EventsController < ApplicationController
     private
     def find_course
         @course=Course.find(params[:course_id])
+    end
+
+    def find_event
+        @event=Event.find(params[:id])
     end
 
     def event_params

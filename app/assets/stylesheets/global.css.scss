@@ -4,32 +4,20 @@ $green: #33CD99;
 
 @font-face {
     font-family: 'BrandonGrotesqueBlk';
-    src:font-url('fonts/BrandonGrotesque-Black.ttf');
+    src:font-url('BrandonGrotesque-Black.ttf');
 }
 @font-face {
     font-family: 'BrandonGrotesqueBold';
-    src:font-url('fonts/BrandonGrotesque-Bold.ttf');
+    src:font-url('BrandonGrotesque-Bold.ttf');
 }
 @font-face {
     font-family: 'BrandonGrotesqueLight';
-    src:font-url('fonts/BrandonGrotesque-Light.ttf');
+    src:font-url('BrandonGrotesque-Light.ttf');
 }
 @font-face {
     font-family: 'BrandonGrotesqueMed';
-    src:font-url('fonts/BrandonGrotesque-Medium.ttf');
+    src:font-url('BrandonGrotesque-Medium.ttf');
 }
-/*
-@font-face {
-    font-family: 'icofonts';
-    src:url('fonts/icofonts.eot');
-    src:url('fonts/icofonts.eot?#iefix') format('embedded-opentype'),
-        url('fonts/icofonts.ttf') format('truetype'),
-        url('fonts/icofonts.woff') format('woff'),
-        url('fonts/icofonts.svg#icofonts') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-*/
 
 @mixin bold_font {
 	font-family: 'BrandonGrotesqueMed',"Helvetica Neue", Helvetica, sans-serif;
