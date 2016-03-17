@@ -1,9 +1,23 @@
 class EventsController < ApplicationController
-    before_action :find_course, only: [:show,:index, :create, :edit, :update, :destroy]
+    before_action :find_course, only: [:show,:index, :create,:new, :edit, :update, :destroy]
     before_action :find_event, only: [:show, :edit, :update]
     def index
         #@event=Event.where(:course_id => @course.id).order(event_date: :asc)
-        @event=Event.all.order(event_date: :asc)
+        #@courses=current_user.courses
+        events=Array.new
+        if current_user.role=="Professor"
+            @course.users.each do |u|
+                u.courses.each do |c|
+                    c.events.each do |e|
+                        events<<e
+                    end
+                end
+            end
+            
+            @event=events.uniq
+        else
+            @event=Event.where(:course_id => @course.id).order(event_date: :asc)
+        end
     end
 
     def show

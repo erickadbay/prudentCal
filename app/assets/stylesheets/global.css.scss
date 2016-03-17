@@ -129,7 +129,7 @@ footer {
 }
 
 #courses{
-	padding-top: 200px;
+	padding-top: 100px;
 }
 
 .course{
@@ -149,8 +149,25 @@ footer {
     padding:100px 400px;
 }
 
+.event{
+    text-align: center;
+    padding: 100px 0;
+}
 
+.form-fields{
+    .input{
+        padding: 10px 0;
+    }
+}
 
+.top-container{
+    padding-left: 70px;
+    padding-top: 30px
+}
+
+.back-btn{
+    padding-left: 70px;
+}
 
 input[type="text"], input[type="email"], input[type="password"], textarea {
 	width: 100%;

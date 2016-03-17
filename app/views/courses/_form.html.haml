@@ -1,3 +1,7 @@
-= simple_form_for @course do |f|
-    = f.input :course_name
+= simple_form_for @course, url: courses_path do |f|
+    #fields
+        = f.input :course_name
+        = f.label "Choose users: "
+        = select_tag "students", options_from_collection_for_select(User.all, 'id', 'email',@course.users.map{ |j| j.id }), :multiple => true
+        = #f.association :users, as: :check_boxes, collection: User.all, label_method: :email
     = f.button :submit

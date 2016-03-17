@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
     before_action :find_course, only: [:show, :edit, :update, :destroy]
     def index
-        @course=Course.all.order(course_name: :desc)
+        @course=current_user.courses
     end
 
     def show
@@ -12,7 +12,9 @@ class CoursesController < ApplicationController
     end
 
     def create
-        @course = current_user.courses.build(event_params)
+        @course = Course.new(course_params)
+        @users=User.where(:id=>params[:students])
+        @course.users << @users
         if @course.save
             redirect_to @course
         else
@@ -24,6 +26,8 @@ class CoursesController < ApplicationController
     end
 
     def update
+        @users=User.where(:id=>params[:students])
+        @course.users << @users
         if @course.update(course_params)
             redirect_to @course
         else
@@ -41,7 +45,7 @@ class CoursesController < ApplicationController
         @course=Course.includes(:events).find(params[:id])
     end
 
-    def event_params
+    def course_params
         params.require(:course).permit(:course_name)
     end
 end

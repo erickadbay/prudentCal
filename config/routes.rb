@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
     devise_for :users, :controllers => { registrations: 'registrations' }
     get 'welcome/index'
+    resources :users
     resources :courses do
       resources :events
     end
