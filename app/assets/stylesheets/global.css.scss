@@ -167,6 +167,20 @@ footer {
 
 .back-btn{
     padding-left: 70px;
+    i{
+        color:$green;
+    }
+    &:hover{
+        text-decoration: underline;
+    }
+}
+
+.calendar-container{
+    padding: 70px;
+}
+
+.aligned-container{
+    padding-left: 70px;
 }
 
 input[type="text"], input[type="email"], input[type="password"], textarea {

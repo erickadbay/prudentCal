@@ -8,16 +8,23 @@ class EventsController < ApplicationController
         if current_user.role=="Professor"
             @course.users.each do |u|
                 u.courses.each do |c|
-                    c.events.each do |e|
-                        events<<e
+                    if u.role=="Professor" && c.id!=@course.id
+                    else
+                        c.events.each do |e|
+                            events<<e
+                        end
                     end
                 end
             end
-            
             @event=events.uniq
-        else
+        else #current_user.role=="Student"
             @event=Event.where(:course_id => @course.id).order(event_date: :asc)
         end
+
+        #respond_to do |format|
+        #  format.html # index.html.erb
+        #  format.json { render :json => @events }
+        #end
     end
 
     def show
