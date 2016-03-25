@@ -4,6 +4,6 @@
 
 #= require fullcalendar
 $(document).ready ->
-  $("#calendar").fullCalendar(
-    events: 'events.json'
-  )
+    $("#calendar").fullCalendar(
+        events: 'events.json'
+    )

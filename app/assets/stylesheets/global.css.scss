@@ -167,6 +167,7 @@ footer {
 
 .back-btn{
     padding-left: 70px;
+    margin-top: 100px;
     i{
         color:$green;
     }
@@ -176,7 +177,11 @@ footer {
 }
 
 .calendar-container{
-    padding: 70px;
+    padding: 0 70px;
+    h1{
+        text-align: center;
+        margin-top: -35px;
+    }
 }
 
 .aligned-container{
