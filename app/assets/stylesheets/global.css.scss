@@ -177,7 +177,7 @@ footer {
 }
 
 .calendar-container{
-    padding: 0 70px;
+    padding: 0 70px 70px 70px;
     h1{
         text-align: center;
         margin-top: -35px;
@@ -186,6 +186,15 @@ footer {
 
 .aligned-container{
     padding-left: 70px;
+}
+
+header{
+    z-index: 10;
+}
+
+.event-show{
+    padding-top: 100px;
+    text-align: center;
 }
 
 input[type="text"], input[type="email"], input[type="password"], textarea {
