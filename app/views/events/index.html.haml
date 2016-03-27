@@ -1,14 +1,16 @@
 .back-btn
     %i.fa.fa-long-arrow-left
-    =link_to "Back to Courses", courses_path
+    =link_to "Back to COURSES", courses_path
 -#
 .calendar-container
-    = link_to "New Event", new_course_event_path
+    %h1= @course.course_name
+    %button.new-event-btn
+        = link_to "New Event", new_course_event_path
     #calendar
 
 -#
     .container
-        %h1= @course.course_name
+
         = link_to "New Event", new_course_event_path
         - @event.each do |e|
             %h2= link_to e.title, course_event_path(e.course_id, e.id)

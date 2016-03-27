@@ -167,6 +167,7 @@ footer {
 
 .back-btn{
     padding-left: 70px;
+    margin-top: 100px;
     i{
         color:$green;
     }
@@ -176,11 +177,40 @@ footer {
 }
 
 .calendar-container{
-    padding: 70px;
+    padding: 0 70px 70px 70px;
+    h1{
+        text-align: center;
+        margin-top: -35px;
+    }
+}
+
+#calendar{
+    padding-top: 50px;
 }
 
 .aligned-container{
     padding-left: 70px;
+}
+
+header{
+    z-index: 10;
+}
+
+.event-show{
+    padding-top: 100px;
+    text-align: center;
+}
+
+.new-event-btn{
+    float: right;
+    padding: 7px 20px;
+    border-radius: 20px;
+    color: $green;
+}
+
+.fc-event-container a{
+    background-color: $green;
+    border-color: $green;
 }
 
 input[type="text"], input[type="email"], input[type="password"], textarea {
