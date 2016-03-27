@@ -18,7 +18,7 @@ class EventsController < ApplicationController
             end
             @event=events.uniq
         else #current_user.role=="Student"
-            @event=Event.where(:course_id => @course.id)
+            @event=Event.where(:course_id => @course.id).order(event_date: :asc)
         end
 
         #respond_to do |format|
@@ -73,6 +73,6 @@ class EventsController < ApplicationController
     end
 
     def event_params
-        params.require(:event).permit(:title, :start_time, :end_time)
+        params.require(:event).permit(:title, :event_date, :start_time, :end_time)
     end
 end

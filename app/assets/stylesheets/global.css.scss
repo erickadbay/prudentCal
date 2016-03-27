@@ -184,6 +184,10 @@ footer {
     }
 }
 
+#calendar{
+    padding-top: 50px;
+}
+
 .aligned-container{
     padding-left: 70px;
 }
@@ -195,6 +199,18 @@ header{
 .event-show{
     padding-top: 100px;
     text-align: center;
+}
+
+.new-event-btn{
+    float: right;
+    padding: 7px 20px;
+    border-radius: 20px;
+    color: $green;
+}
+
+.fc-event-container a{
+    background-color: $green;
+    border-color: $green;
 }
 
 input[type="text"], input[type="email"], input[type="password"], textarea {
