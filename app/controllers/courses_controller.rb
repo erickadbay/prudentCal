@@ -5,6 +5,7 @@ class CoursesController < ApplicationController
     end
 
     def show
+        redirect_to course_events_path(@course.id)
     end
 
     def new
@@ -14,6 +15,7 @@ class CoursesController < ApplicationController
     def create
         @course = Course.new(course_params)
         @users=User.where(:id=>params[:students])
+        @course.user_id=current_user.id if current_user
         @course.users << @users
         if @course.save
             redirect_to @course
