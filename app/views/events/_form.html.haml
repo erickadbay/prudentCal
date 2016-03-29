@@ -1,7 +1,7 @@
 = simple_form_for @event, url: course_events_path do |f|
-    = f.input :title
+    #title_field
+        = f.input :title
     .form-fields
-        = f.input :event_date
-        = f.input :start_time
-        = f.input :end_time
-        = f.button :submit
+        = f.input :start_time, label: 'Starts: '
+        = f.input :end_time, label: 'Ends: '
+        = f.button :submit, class: "button", id: "submitbtn"

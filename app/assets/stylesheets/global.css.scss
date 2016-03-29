@@ -146,7 +146,11 @@ footer {
 }
 
 .form{
-    padding:100px 400px;
+    padding:0px 400px;
+    margin-top: -50px;
+    h1{
+        text-align: center;
+    }
 }
 
 .event{
@@ -211,6 +215,18 @@ header{
 .fc-event-container a{
     background-color: $green;
     border-color: $green;
+}
+
+.datetime .optional{
+    padding-right: 10px;
+}
+
+#edit-form{
+    margin-top: 100px;
+}
+
+label{
+    padding-right: 10px;
 }
 
 input[type="text"], input[type="email"], input[type="password"], textarea {

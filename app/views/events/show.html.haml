@@ -1,18 +1,21 @@
 .event-show
     %h1= @event.title
-    %p
-        %strong Date:
-        #{@event.event_date}
+    -#
+        %p
+            %strong Date:
+            #{@event.event_date.to_formatted_s(:long)}
     %p
         %strong Starts:
-        #{@event.start_time.to_s(:time)}
+        #{@event.start_time.to_formatted_s(:long) }
     %p
         %strong Ends:
-        #{@event.start_time.to_s(:time)}
+        #{@event.start_time.to_formatted_s(:long)}
     %p
         %strong Posted by:
         #{@event.user.first_name} #{@event.user.last_name}
-    =link_to "All events", course_events_path(@event.course_id)
+    %p
+        %strong Course name: 
+        #{@course.course_name}
     - if @event.user.id==current_user[:id]
         =link_to "Edit", edit_course_event_path(@event.course, @event)
         =link_to "Delete", course_event_path(@event.course, @event), method: :delete, data: {confirm: "Are you sure?"}

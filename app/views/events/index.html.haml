@@ -7,6 +7,13 @@
     %button.new-event-btn
         = link_to "New Event", new_course_event_path
     #calendar
+    -#
+        -if @event.user.id==current_user[:id]
+            .fc-event-container
+                %a{:style => "background-color: red;border-color: red;"}
+        -else
+            .fc-event-container
+                %a{:style => "background-color: #33CD99;border-color: #33CD99;"}
 
 -#
     .container

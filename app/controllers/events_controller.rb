@@ -2,8 +2,6 @@ class EventsController < ApplicationController
     before_action :find_course, only: [:show,:index, :create,:new, :edit, :update, :destroy]
     before_action :find_event, only: [:show, :edit, :update]
     def index
-        #@event=Event.where(:course_id => @course.id).order(event_date: :asc)
-        #@courses=current_user.courses
         events=Array.new
         if current_user.role=="Professor"
             @course.users.each do |u|
@@ -20,11 +18,6 @@ class EventsController < ApplicationController
         else #current_user.role=="Student"
             @event=Event.where(:course_id => @course.id).order(event_date: :asc)
         end
-
-        #respond_to do |format|
-        #  format.html # index.html.erb
-        #  format.json { render :json => @events }
-        #end
     end
 
     def show
@@ -73,6 +66,6 @@ class EventsController < ApplicationController
     end
 
     def event_params
-        params.require(:event).permit(:title, :event_date, :start_time, :end_time)
+        params.require(:event,:title).permit(:title, :event_date, :start_time, :end_time)
     end
 end
