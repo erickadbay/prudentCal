@@ -8,11 +8,9 @@ class Event < ActiveRecord::Base
       :title => self.title,
       :start => start_time.rfc822,
       :end => end_time.rfc822,
-      :url => Rails.application.routes.url_helpers.event_path(id),
-      #:color => "red"
+      :url => Rails.application.routes.url_helpers.event_path(id)
     }
-
-  end
+    end
 
   def self.format_date(date_time)
     Time.at(date_time.to_i).to_formatted_s(:db)

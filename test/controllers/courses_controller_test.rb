@@ -8,7 +8,7 @@ class CoursesControllerTest < ActionController::TestCase
 
   test "index should render correct template and layout" do
       get :index
-      assert_template :index
+      assert_template 'courses/index'
       assert_template layout: "layouts/application"
   end
 

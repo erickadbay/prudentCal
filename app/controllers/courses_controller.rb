@@ -28,18 +28,18 @@ class CoursesController < ApplicationController
     end
 
     def update
-        @users=User.where(:id=>params[:students])
-        @course.users << @users
-        if @course.update(course_params)
-            redirect_to @course
-        else
-            render 'edit'
-        end
+        #@users=User.where(:id=>params[:students])
+        #@course.users << @users
+        #if @course.update(course_params)
+        #    redirect_to @course
+        #else
+        #    render 'edit'
+        #end
     end
 
     def destroy
-        @course.destroy
-        redirect_to courses_path
+        #@course.destroy
+        #redirect_to courses_path
     end
 
     private

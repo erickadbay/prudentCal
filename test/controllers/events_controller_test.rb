@@ -5,7 +5,7 @@ class EventsControllerTest < ActionController::TestCase
     #   assert true
     # end
     test "index should render correct template and layout" do
-        get :index
+        get :index, :course_id=>1
         assert_template :index
         assert_template layout: "layouts/application"
     end
