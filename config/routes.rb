@@ -6,9 +6,6 @@ Rails.application.routes.draw do
       resources :events
     end
 
-    get 'courses/:id/events/new'=>'events#new', as:
-    "new_course_in_event"
-
     authenticated :user do
         root 'courses#index', as: "authenticated_root"
     end

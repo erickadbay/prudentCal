@@ -6,8 +6,7 @@ class EventsController < ApplicationController
         if current_user.role=="Professor"
             @course.users.each do |u|
                 u.courses.each do |c|
-                    if u.role=="Professor" && c.id!=@course.id
-                    else
+                    unless u.role=="Professor" && c.id!=@course.id
                         c.events.each do |e|
                             events<<e
                         end
@@ -17,6 +16,13 @@ class EventsController < ApplicationController
             @event=events.uniq
         else #current_user.role=="Student"
             @event=Event.where(:course_id => @course.id).order(event_date: :asc)
+=begin
+                current_user.courses.each do |c|
+                    c.events.each do |e|
+                        events<<e
+                    end
+                end
+=end
         end
     end
 
@@ -28,10 +34,9 @@ class EventsController < ApplicationController
     end
 
     def create
-        @event = @course.events.create(params[:event].permit(:title, :event_date, :start_time, :end_time))
+        @event = @course.events.create(event_params)
         @event.user_id=current_user.id if current_user
         @event.save
-
         if @event.save
             redirect_to course_events_path
         else
@@ -66,6 +71,6 @@ class EventsController < ApplicationController
     end
 
     def event_params
-        params.require(:event,:title).permit(:title, :event_date, :start_time, :end_time)
+        params.require(:event).permit(:title, :event_date, :start_time, :end_time)
     end
 end
