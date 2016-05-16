@@ -5,58 +5,6 @@
 .calendar-container
     %h1= @course.course_name
     %button.new-event-btn
-        = link_to "New Event", new_course_event_path
+        = link_to "New Event", new_course_event_path, remote: true
     #calendar
-    -#
-        -if @event.user.id==current_user[:id]
-            .fc-event-container
-                %a{:style => "background-color: red;border-color: red;"}
-        -else
-            .fc-event-container
-                %a{:style => "background-color: #33CD99;border-color: #33CD99;"}
-
--#
-    .container
-
-        = link_to "New Event", new_course_event_path
-        - @event.each do |e|
-            %h2= link_to e.title, course_event_path(e.course_id, e.id)
-            %p
-                %strong Date:
-                #{e.event_date}
-            %p
-                %strong Start time:
-                #{e.start_time.hour}:#{e.start_time.min}
-            %p
-                %strong End time:
-                #{e.end_time.hour}:#{e.end_time.min}
-    -#
-        - if current_user.role=="Professor"
-            %h1 IM A PROF!
-            - @course.users.each do |u|
-                %p #{u.email}
-                - u.courses.each do |c|
-                    -c.events.each do |e|
-                        %h2= link_to e.title, course_event_path(e.course_id, e.id)
-                        %p
-                            %strong Date:
-                            #{e.event_date}
-                        %p
-                            %strong Start time:
-                            #{e.start_time.hour}:#{e.start_time.min}
-                        %p
-                            %strong End time:
-                            #{e.end_time.hour}:#{e.end_time.min}
-        - else
-            %h1 IM A STUDENT!
-            - @event.each do |e|
-                %h2= link_to e.title, course_event_path(e.course_id, e.id)
-                %p
-                    %strong Date:
-                    #{e.event_date}
-                %p
-                    %strong Start time:
-                    #{e.start_time.hour}:#{e.start_time.min}
-                %p
-                    %strong End time:
-                    #{e.end_time.hour}:#{e.end_time.min}
+=render 'modal'

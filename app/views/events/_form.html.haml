@@ -1,4 +1,4 @@
-= simple_form_for @event, url: course_events_path do |f|
+= simple_form_for @event, remote: true, url: course_events_path do |f|
     #title_field
         = f.input :title
     .form-fields

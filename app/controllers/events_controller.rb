@@ -15,14 +15,12 @@ class EventsController < ApplicationController
             end
             @event=events.uniq
         else #current_user.role=="Student"
-            @event=Event.where(:course_id => @course.id).order(event_date: :asc)
-=begin
-                current_user.courses.each do |c|
-                    c.events.each do |e|
-                        events<<e
-                    end
-                end
-=end
+            @event=Event.where(:course_id => @course.id)
+        end
+        respond_to do |format|
+            format.html
+            format.js
+            format.json
         end
     end
 
@@ -31,16 +29,26 @@ class EventsController < ApplicationController
 
     def new
         @event=Event.new
+        respond_to do |format|
+            format.html
+            format.js
+            format.json
+        end
     end
 
     def create
         @event = @course.events.create(event_params)
         @event.user_id=current_user.id if current_user
         @event.save
-        if @event.save
-            redirect_to course_events_path
-        else
-            render 'new'
+        respond_to do |format|
+            if @event.save
+                #format.html {redirect_to course_events_path}
+                format.json { head :no_content }
+                format.js
+            else
+                #render 'new'
+                format.json { render json: @event.errors.full_messages, status: :unprocessable_entity }
+            end
         end
     end
 

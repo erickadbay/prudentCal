@@ -1,9 +1,5 @@
 .event-show
     %h1= @event.title
-    -#
-        %p
-            %strong Date:
-            #{@event.event_date.to_formatted_s(:long)}
     %p
         %strong Starts:
         #{@event.start_time.to_formatted_s(:long) }
@@ -14,7 +10,7 @@
         %strong Posted by:
         #{@event.user.first_name} #{@event.user.last_name}
     %p
-        %strong Course name: 
+        %strong Course name:
         #{@course.course_name}
     - if @event.user.id==current_user[:id]
         =link_to "Edit", edit_course_event_path(@event.course, @event)
