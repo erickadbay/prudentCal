@@ -1,9 +1,9 @@
-.top-container
+#welcome_message{:style => "display: none;"}
     - if user_signed_in?
         - if current_user.role=="Professor"
-            %h1 Hello, Prof. #{current_user.first_name} #{current_user.last_name}
+            %h3 Welcome! Prof. #{current_user.first_name} #{current_user.last_name}
         - else
-            %h1 Hello, #{current_user.first_name} #{current_user.last_name}
+            %h3 Welcome! #{current_user.first_name} #{current_user.last_name}
 #courses
     - @course.each do |course|
         .course

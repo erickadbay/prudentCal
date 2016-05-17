@@ -1,6 +1,7 @@
 $dark_gray: #2B2E2E;
 $light_gray: #C0C1C1;
 $green: #33CD99;
+$white: #FFFFFF;
 
 @font-face {
     font-family: 'BrandonGrotesqueBlk';
@@ -129,7 +130,7 @@ footer {
 }
 
 #courses{
-	padding-top: 100px;
+	padding-top: 150px;
 }
 
 .course{
@@ -223,6 +224,25 @@ header{
 
 #edit-form{
     margin-top: 100px;
+}
+
+#welcome_message{
+    width: 100%;
+    position: absolute;
+    background-color: $green;
+    opacity: 0.85;
+    z-index: 999;
+    h3{
+        color: $white;
+        text-align: center;
+        font-weight: 700;
+    }
+}
+
+#modal{
+    h3{
+        text-align: center;
+    }
 }
 
 label{
