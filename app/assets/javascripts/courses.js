@@ -21,6 +21,6 @@ function displayWelcomeMessage(){
     $('#welcome_message').fadeIn(700, function(){
         setTimeout(function(){
             $('#welcome_message').fadeOut(700);
-        }, 3000)
+        }, 3000);
     });
 }
