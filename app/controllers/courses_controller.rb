@@ -2,13 +2,6 @@ class CoursesController < ApplicationController
     before_action :find_course, only: [:show, :edit, :update, :destroy]
     def index
         @course=current_user.courses
-=begin
-        if current_user.role=="Professor"
-            @course=current_user.courses
-        else
-            redirect_to events_path
-        end
-=end
     end
 
     def show
@@ -30,25 +23,7 @@ class CoursesController < ApplicationController
             render 'new'
         end
     end
-=begin
-    def edit
-    end
 
-    def update
-        #@users=User.where(:id=>params[:students])
-        #@course.users << @users
-        #if @course.update(course_params)
-        #    redirect_to @course
-        #else
-        #    render 'edit'
-        #end
-    end
-
-    def destroy
-        #@course.destroy
-        #redirect_to courses_path
-    end
-=end
     private
     def find_course
         @course=Course.includes(:events).find(params[:id])

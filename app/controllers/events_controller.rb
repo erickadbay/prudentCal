@@ -3,24 +3,30 @@ class EventsController < ApplicationController
     before_action :find_event, only: [:show, :edit, :update]
     def index
         events=Array.new
-        if current_user.role=="Professor"
-            @course.users.each do |u|
-                u.courses.each do |c|
-                    unless u.role=="Professor" && c.id!=@course.id
-                        c.events.each do |e|
-                            events<<e
+        redirect_to courses_path unless
+        if current_user.courses.include?(@course)
+            if current_user.role=="Professor"
+                @course.users.each do |u|
+                    u.courses.each do |c|
+                        unless u.role=="Professor" && c.id!=@course.id
+                            c.events.each do |e|
+                                events<<e
+                            end
                         end
                     end
                 end
+                @event=events.uniq
+            else #current_user.role=="Student"
+                @event=Event.where(:course_id => @course.id)
             end
-            @event=events.uniq
-        else #current_user.role=="Student"
-            @event=Event.where(:course_id => @course.id)
-        end
-        respond_to do |format|
-            format.html
-            format.js
-            format.json
+
+            respond_to do |format|
+                format.html
+                format.js
+                format.json
+            end
+        else
+            redirect_to courses_path
         end
     end
 
@@ -42,11 +48,9 @@ class EventsController < ApplicationController
         @event.save
         respond_to do |format|
             if @event.save
-                #format.html {redirect_to course_events_path}
                 format.json { head :no_content }
                 format.js
             else
-                #render 'new'
                 format.json { render json: @event.errors.full_messages, status: :unprocessable_entity }
             end
         end
