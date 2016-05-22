@@ -1,10 +1,9 @@
+=render 'modal'
 .back-btn
     %i.fa.fa-long-arrow-left
     =link_to "Back to COURSES", courses_path
--#
 .calendar-container
     %h1= @course.course_name
     %button.new-event-btn
         = link_to "New Event", new_course_event_path, remote: true
     #calendar
-=render 'modal'

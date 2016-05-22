@@ -1,0 +1,40 @@
+// Place all the styles related to the events controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#modal{
+    h3, .form-fields{
+        text-align: center;
+    }
+}
+
+.calendar-container{
+    padding: 0 150px 70px 150px;
+    h1{
+        text-align: center;
+        margin-top: -35px;
+    }
+    .new-event-btn{
+        float: right;
+        padding: 7px 20px;
+        border-radius: 20px;
+        color: $green;
+    }
+    #calendar{
+        padding-top: 50px;
+    }
+    .fc-event-container a{
+        background-color: $green;
+        border-color: $green;
+    }
+
+}
+
+.event{
+    padding-top: 100px;
+    text-align: center;
+}
+
+.edit-event-form{
+    margin-top: 100px;
+}

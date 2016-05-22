@@ -2,10 +2,9 @@ class EventsController < ApplicationController
     before_action :find_course, only: [:show,:index, :create,:new, :edit, :update, :destroy]
     before_action :find_event, only: [:show, :edit, :update]
     def index
-        events=[]
         if current_user.courses.include?(@course)
-
             if current_user.role=="Professor"
+                events=[]
                 @course.users.where(:role => "Student").each do |u|
                     u.courses.each do |c|
                         events.concat(Event.where(:course_id => c.id))

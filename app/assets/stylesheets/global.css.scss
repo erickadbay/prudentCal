@@ -1,32 +1,4 @@
-$dark_gray: #2B2E2E;
-$light_gray: #C0C1C1;
-$green: #33CD99;
-$white: #FFFFFF;
-
-@font-face {
-    font-family: 'BrandonGrotesqueBlk';
-    src:font-url('BrandonGrotesque-Black.ttf');
-}
-@font-face {
-    font-family: 'BrandonGrotesqueBold';
-    src:font-url('BrandonGrotesque-Bold.ttf');
-}
-@font-face {
-    font-family: 'BrandonGrotesqueLight';
-    src:font-url('BrandonGrotesque-Light.ttf');
-}
-@font-face {
-    font-family: 'BrandonGrotesqueMed';
-    src:font-url('BrandonGrotesque-Medium.ttf');
-}
-
-@mixin bold_font {
-	font-family: 'BrandonGrotesqueMed',"Helvetica Neue", Helvetica, sans-serif;
-	font-weight: bold;
-	text-transform: uppercase;
-}
-
-* {
+*{
 	box-sizing: border-box;
 	-webkit-font-smoothing: antialiased;
 }
@@ -132,22 +104,6 @@ footer {
 .deviseform{
     padding: 70px 150px;
 }
-#courses{
-	padding-top: 150px;
-}
-
-.course{
-	text-align: center;
-	padding-bottom: 10px;
-	h1{
-		font-family: 'BrandonGrotesqueMed',"Helvetica Neue", Helvetica, sans-serif;
-	}
-}
-
-.container{
-	text-align: center;
-	padding-top: 50px;
-}
 
 .form{
     padding:0px 400px;
@@ -157,20 +113,10 @@ footer {
     }
 }
 
-.event{
-    text-align: center;
-    padding: 100px 0;
-}
-
 .form-fields{
     .input{
         padding: 10px 0;
     }
-}
-
-.top-container{
-    padding-left: 70px;
-    padding-top: 30px
 }
 
 .back-btn{
@@ -184,69 +130,8 @@ footer {
     }
 }
 
-.calendar-container{
-    padding: 0 150px 70px 150px;
-    h1{
-        text-align: center;
-        margin-top: -35px;
-    }
-}
-
-
-#calendar{
-    padding-top: 50px;
-}
-
-.aligned-container{
-    padding-left: 70px;
-}
-
 header{
     z-index: 10;
-}
-
-.event-show{
-    padding-top: 100px;
-    text-align: center;
-}
-
-.new-event-btn{
-    float: right;
-    padding: 7px 20px;
-    border-radius: 20px;
-    color: $green;
-}
-
-.fc-event-container a{
-    background-color: $green;
-    border-color: $green;
-}
-
-.datetime .optional{
-    padding-right: 10px;
-}
-
-#edit-form{
-    margin-top: 100px;
-}
-
-#welcome_message{
-    width: 100%;
-    position: absolute;
-    background-color: $green;
-    opacity: 0.85;
-    z-index: 999;
-    h3{
-        color: $white;
-        text-align: center;
-        font-weight: 700;
-    }
-}
-
-#modal{
-    h3, .form-fields{
-        text-align: center;
-    }
 }
 
 label{
@@ -267,6 +152,7 @@ input[type="text"], input[type="email"], input[type="password"] {
 textarea {
 	min-height: 200px;
 }
+
 /*     BOOTSTRAP STYLE FOR THE MODAL           */
 .close {
   float: right;
