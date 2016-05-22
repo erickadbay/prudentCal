@@ -12,7 +12,7 @@ class EventsController < ApplicationController
                     end
                 end
                 @event=events.uniq
-            else #current_user.role=="Student"
+            else #Current user is a student
                 @event=Event.where(:course_id => @course.id)
             end
 
@@ -44,7 +44,7 @@ class EventsController < ApplicationController
         @event.save
         respond_to do |format|
             if @event.save
-                format.html {redirect_to course_events_path}
+                #format.html {redirect_to course_events_path}
                 format.json { head :no_content }
                 format.js
             else

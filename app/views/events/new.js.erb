@@ -1,0 +1,7 @@
+$('#modal h3').html("<i class='glyphicon glyphicon-plus'></i> Add New Event");
+$('.modal-body').html('<%= j render("form") %>');
+$('#modal').modal("show");
+$('#modal').on('shown.bs.modal', function () {
+	  $('.first_input').focus()
+  });
+console.log("New action triggered");

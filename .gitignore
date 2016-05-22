@@ -15,11 +15,3 @@
 /log/*
 !/log/.keep
 /tmp
-
-app/views/events/_form.html.haml
-
-app/views/events/create.js
-
-app/views/events/create.js.erb
-
-app/views/events/new.js.erb

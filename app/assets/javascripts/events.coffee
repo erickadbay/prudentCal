@@ -6,6 +6,10 @@
 $(document).ready ->
   $("#calendar").fullCalendar(
     events: 'events.json'
+    header:
+      left: 'prev,next today'
+      center: 'title'
+      right: 'month,agendaWeek,agendaDay'
   )
   $('#submitbtn').click (evt) ->
     if !checkForm('event_title')
