@@ -11,6 +11,7 @@
 .calendar-container{
     padding: 0 150px 70px 150px;
     h1{
+        color: $green;
         text-align: center;
         margin-top: -35px;
     }
@@ -26,6 +27,10 @@
     .fc-event-container a{
         background-color: $green;
         border-color: $green;
+    }
+
+    .fc-button{
+        border-radius: 2px;
     }
 
 }
