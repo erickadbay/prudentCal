@@ -10,14 +10,13 @@ class EventsController < ApplicationController
                         events.concat(Event.where(:course_id => c.id))
                     end
                 end
-                @event=events.uniq
+                @event=events.uniq #In case there are students taking the same classes
             else #Current user is a student
                 @event=Event.where(:course_id => @course.id)
             end
 
             respond_to do |format|
                 format.html
-                format.js
                 format.json
             end
         else
@@ -31,9 +30,7 @@ class EventsController < ApplicationController
     def new
         @event=Event.new
         respond_to do |format|
-            format.html
             format.js
-            format.json
         end
     end
 

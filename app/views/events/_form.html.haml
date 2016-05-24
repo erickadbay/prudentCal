@@ -1,6 +1,6 @@
 = simple_form_for @event, remote: true, url: course_events_path do |f|
     #title_field
-        = f.input :title
+        = f.input :title, class: "first_input"
     .form-fields
         = f.input :start_time, label: 'Starts: '
         = f.input :end_time, label: 'Ends: '

@@ -1,4 +1,4 @@
-.welcome_message{:style => "display: none;"}
+#welcome_message{:style => "display: none;"}
     - if user_signed_in?
         - if current_user.role=="Professor"
             %h3 Welcome! Prof. #{current_user.first_name} #{current_user.last_name}
