@@ -37,6 +37,7 @@ class EventsController < ApplicationController
     def create
         @event = @course.events.create(event_params)
         @event.user_id=current_user.id if current_user
+        current_user.role=="Professor" ? @event.className="prof-event" : @event.className="student-event"
         @event.save
         respond_to do |format|
             if @event.save
@@ -77,6 +78,6 @@ class EventsController < ApplicationController
     end
 
     def event_params
-        params.require(:event).permit(:title, :event_date, :start_time, :end_time)
+        params.require(:event).permit(:title, :start_time, :end_time)
     end
 end

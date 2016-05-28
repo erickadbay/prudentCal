@@ -27,6 +27,16 @@
     .fc-button{
         border-radius: 2px;
     }
+    
+    .prof-event{
+        background-color: $red !important;
+        border-color: $red !important;
+    }
+
+    .student-event{
+        background-color: $green !important;
+        border-color: $green !important;
+    }
 
 }
 

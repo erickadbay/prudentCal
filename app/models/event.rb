@@ -8,6 +8,7 @@ class Event < ActiveRecord::Base
       :title => self.title,
       :start => start_time.rfc822,
       :end => end_time.rfc822,
+      :className => self.className,
       :url => Rails.application.routes.url_helpers.event_path(id)
     }
     end
