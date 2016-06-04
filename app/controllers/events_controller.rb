@@ -10,7 +10,7 @@ class EventsController < ApplicationController
                         events.concat(Event.where(:course_id => c.id))
                     end
                 end
-                @event=events.uniq #In case there are students taking the same classes
+                @event=events.uniq! #In case there are students taking the same classes
             else #Current user is a student
                 @event=Event.where(:course_id => @course.id)
             end
@@ -19,7 +19,7 @@ class EventsController < ApplicationController
                 format.html
                 format.json
             end
-        else
+        else ##User is trying to do some fishy stuff so let's redirect him back
             redirect_to courses_path
         end
     end
@@ -41,11 +41,9 @@ class EventsController < ApplicationController
         @event.save
         respond_to do |format|
             if @event.save
-                #format.html {redirect_to course_events_path}
                 format.json { head :no_content }
                 format.js
             else
-                #render 'new'
                 format.json { render json: @event.errors.full_messages, status: :unprocessable_entity }
             end
         end
