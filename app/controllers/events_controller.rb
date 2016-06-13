@@ -7,19 +7,23 @@ class EventsController < ApplicationController
                 events=[]
                 @course.users.where(:role => "Student").each do |u|
                     u.courses.each do |c|
-                        events.concat(Event.where(:course_id => c.id))
+                        #Where not gets the events that are not mine and that are private
+                        events.concat(Event.where(:course_id => c.id).where.not("user_id != ? AND private = ?", current_user.id, true))
                     end
                 end
                 @event=events.uniq! #In case there are students taking the same classes
             else #Current user is a student
-                @event=Event.where(:course_id => @course.id)
+                @event=Event.where(:course_id => @course.id).where.not("user_id != ? AND private=?", current_user.id, true)
             end
+
+            cookies[:course_id]=@course.id
+            cookies[:course_name]=@course.course_name
 
             respond_to do |format|
                 format.html
                 format.json
             end
-        else ##User is trying to do some fishy stuff so let's redirect him back
+        else ##User is trying to check courses where he is not enrolled in
             redirect_to courses_path
         end
     end
@@ -37,7 +41,16 @@ class EventsController < ApplicationController
     def create
         @event = @course.events.create(event_params)
         @event.user_id=current_user.id if current_user
-        current_user.role=="Professor" ? @event.className="prof-event" : @event.className="student-event"
+
+        ## Color coding
+        if @event.user_id==current_user.id && @event.private?
+            @event.className="private-event"
+        elsif current_user.role=="Profesor"
+            @event.className="prof-event"
+        elsif current_user.role=="Student"
+            @event.className="student-event"
+        end
+
         @event.save
         respond_to do |format|
             if @event.save
@@ -76,6 +89,6 @@ class EventsController < ApplicationController
     end
 
     def event_params
-        params.require(:event).permit(:title, :start_time, :end_time)
+        params.require(:event).permit(:title, :start_time, :end_time, :private)
     end
 end

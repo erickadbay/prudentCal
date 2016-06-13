@@ -4,6 +4,16 @@
     =link_to "Back To Courses", courses_path
 .calendar-container
     %h1= @course.course_name
-    %button.new-event-btn
-        = link_to "New Event", new_course_event_path, remote: true
+    .legend-new-container
+        .legend
+            .legend-icon#prof-icon
+            %p Professor event
+        .legend
+            .legend-icon#student-icon
+            %p Student event
+        .legend
+            .legend-icon#private-icon
+            %p Private event
+        %button.new-event-btn
+            = link_to "New Event", new_course_event_path, remote: true
     #calendar

@@ -1,3 +1,6 @@
+.back-btn
+    %i.fa.fa-long-arrow-left
+    =link_to "Back To #{cookies[:course_name]}", course_events_path(cookies[:course_id])
 .event
     %h1= @event.title
     %p

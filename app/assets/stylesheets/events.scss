@@ -15,6 +15,32 @@
         text-align: center;
         margin-top: -35px;
     }
+    .legend-new-container{
+        padding-top: 20px;
+    }
+    .legend{
+        display: inline-block;
+        p{
+            display: inline-block;
+            padding: 0 5px;
+            margin: 0;
+        }
+    }
+    .legend-icon{
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        border-radius: 3px;
+    }
+    #prof-icon{
+        background: $red;
+    }
+    #student-icon{
+        background: $green;
+    }
+    #private-icon{
+        background: $blue;
+    }
     .new-event-btn{
         float: right;
         padding: 7px 20px;
@@ -22,7 +48,7 @@
         color: $green;
     }
     #calendar{
-        padding-top: 50px;
+        padding-top: 30px;
     }
     .fc-button{
         border-radius: 2px;
@@ -34,6 +60,10 @@
     .student-event{
         background-color: $green !important;
         border-color: $green !important;
+    }
+    .private-event{
+        background-color: $blue !important;
+        border-color: $blue !important;
     }
 }
 
