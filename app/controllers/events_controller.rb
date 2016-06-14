@@ -42,11 +42,7 @@ class EventsController < ApplicationController
         @event = @course.events.create(event_params)
         @event.user_id=current_user.id if current_user
 
-        #Assigning class names to events so that I can color code them in CSS
-        current_user.role=="Professor" ? @event.className="prof-event" : @event.className="student-event"
-        @event.className="private-event" if @event.private
-
-        @event.save
+        save_className(@event)
         respond_to do |format|
             if @event.save
                 format.json { head :no_content }
@@ -62,6 +58,7 @@ class EventsController < ApplicationController
 
     def update
         if @event.update(event_params)
+            save_className(@event)
             redirect_to course_event_path(@course.id, @event.id)
         else
             render 'edit'
@@ -85,5 +82,12 @@ class EventsController < ApplicationController
 
     def event_params
         params.require(:event).permit(:title, :start_time, :end_time, :private)
+    end
+
+    #Assigns class names to events so that I can color code them in CSS
+    def save_className(event)
+        current_user.role=="Professor" ? event.className="prof-event" : event.className="student-event"
+        event.className="private-event" if event.private
+        event.save
     end
 end
