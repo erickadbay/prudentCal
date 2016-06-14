@@ -42,14 +42,9 @@ class EventsController < ApplicationController
         @event = @course.events.create(event_params)
         @event.user_id=current_user.id if current_user
 
-        ## Color coding
-        if @event.user_id==current_user.id && @event.private?
-            @event.className="private-event"
-        elsif current_user.role=="Profesor"
-            @event.className="prof-event"
-        elsif current_user.role=="Student"
-            @event.className="student-event"
-        end
+        #Assigning class names to events so that I can color code them in CSS
+        current_user.role=="Professor" ? @event.className="prof-event" : @event.className="student-event"
+        @event.className="private-event" if @event.private
 
         @event.save
         respond_to do |format|
