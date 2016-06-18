@@ -3,25 +3,26 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 #= require fullcalendar
-$(document).ready ->
-  $("#calendar").fullCalendar(
-    events: 'events.json'
-    header:
-      left: 'prev,next today'
-      center: 'title'
-      right: 'month,agendaWeek,agendaDay'
-  )
-  $('#submitbtn').click (evt) ->
-    if !checkForm('event_title')
-      evt.preventDefault()
-      alert 'Please provide an event title and submit again.'
-      return false
-    $('form#submitbtn').submit()
-    return
-  return
 
-checkForm = (id) ->
-   if $('#' + id).val() == null or $('#' + id).val() == ''
-     false
-   else
-     true
+$(document).ready ->
+    if $(window).width() > 800
+        $("#calendar").fullCalendar(
+            events: 'events.json'
+            header:
+                left: 'prev,next today'
+                center: 'title'
+                right: 'month,agendaWeek,agendaDay'
+            eventLimit: true, 5
+        )
+    else
+        $("#calendar").fullCalendar(
+            events: 'events.json'
+            defaultView: 'agendaWeek'
+            height: 450
+            header:
+                left: 'prev,next today'
+                center: 'title'
+                right: 'month,agendaWeek,agendaDay'
+            eventLimit: true, 5
+        )
+    

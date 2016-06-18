@@ -91,3 +91,14 @@
 			color: #a7a8a8;
 		}
 }
+
+@media (max-width: $breakpoint-tablet) {
+
+}
+@media (max-width: $breakpoint-mobile) {
+  #callouts{
+	  .callout{
+		  width:100%;
+	  }
+  }
+}

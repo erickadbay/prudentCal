@@ -7,7 +7,7 @@ class EventsController < ApplicationController
                 events=[]
                 @course.users.where(:role => "Student").each do |u|
                     u.courses.each do |c|
-                        #Where not gets the events that are not mine and that are private
+                        #Where not ignores events that are private and not mine
                         events.concat(Event.where(:course_id => c.id).where.not("user_id != ? AND private = ?", current_user.id, true))
                     end
                 end

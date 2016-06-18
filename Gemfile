@@ -35,8 +35,8 @@ gem 'simple_form', '~> 3.2', '>= 3.2.1'
 gem 'devise', '~> 3.5', '>= 3.5.5'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
-
 gem 'jquery-turbolinks'
+gem 'client_side_validations-simple_form', '~> 3.2', '>= 3.2.3'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

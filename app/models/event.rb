@@ -2,6 +2,7 @@ class Event < ActiveRecord::Base
     belongs_to :course
     belongs_to :user
 
+    validates :title, presence: true
     def as_json(options = {})
     {
       :id => self.id,

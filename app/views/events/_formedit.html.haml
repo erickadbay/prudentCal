@@ -1,4 +1,4 @@
-= simple_form_for @event, url: course_event_path(@course.id, @event.id) do |f|
+= simple_form_for @event, validate: true, url: course_event_path(@course.id, @event.id) do |f|
     = f.input :title, required: true
     .form-fields
         = f.input :start_time, label: 'Starts: '
