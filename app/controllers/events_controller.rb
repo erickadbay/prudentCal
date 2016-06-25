@@ -1,19 +1,22 @@
 class EventsController < ApplicationController
-    before_action :find_course, only: [:show,:index, :create,:new, :edit, :update, :destroy]
-    before_action :find_event, only: [:show, :edit, :update]
+    before_action :find_course, only: [:show,:index, :create,:new, :edit, :update, :destroy, :approve, :deny]
+    before_action :find_event, only: [:show, :edit, :update, :approve, :deny]
+
+    helper EventsHelper
     def index
         if current_user.courses.include?(@course)
-            if current_user.role=="Professor"
-                events=[]
-                @course.users.where(:role => "Student").each do |u|
+            if current_user.isProf
+                @event=[]
+                #Using includes greatly reduces the number of queries. Let's test it to see how it holds up
+                @course.users.where(:role => "Student").includes(:courses).each do |u|
                     u.courses.each do |c|
                         #Where not ignores events that are private and not mine
-                        events.concat(Event.where(:course_id => c.id).where.not("user_id != ? AND private = ?", current_user.id, true))
+                        @event.concat(Event.where("course_id = ? AND pending_approval=?", c.id, false).where.not("user_id != ? AND private = ?", current_user.id, true))
                     end
                 end
-                @event=events.uniq! #In case there are students taking the same classes
+                @event.uniq! #In case there are students taking the same classes
             else #Current user is a student
-                @event=Event.where(:course_id => @course.id).where.not("user_id != ? AND private=?", current_user.id, true)
+                @event=Event.where("course_id = ? AND pending_approval=?", @course.id, false).where.not("user_id != ? AND private=?", current_user.id, true)
             end
 
             cookies[:course_id]=@course.id
@@ -42,7 +45,10 @@ class EventsController < ApplicationController
         @event = @course.events.create(event_params)
         @event.user_id=current_user.id if current_user
 
-        save_className(@event)
+        set_pending_approval(@event)
+        set_className(@event)
+
+        @event.save
         respond_to do |format|
             if @event.save
                 format.json { head :no_content }
@@ -58,7 +64,8 @@ class EventsController < ApplicationController
 
     def update
         if @event.update(event_params)
-            save_className(@event)
+            set_className(@event)
+            @event.save
             redirect_to course_event_path(@course.id, @event.id)
         else
             render 'edit'
@@ -69,6 +76,24 @@ class EventsController < ApplicationController
         @event = @course.events.find(params[:id])
         @event.destroy
         redirect_to course_events_path(@course.id)
+    end
+
+    def approve
+        @event.pending_approval = false
+        @event.save
+        respond_to do |format|
+            format.html {redirect_to pending_events_list_course_path(@course.id)}
+            # => format.js
+        end
+    end
+
+    def deny
+        @event = @course.events.find(params[:id])
+        @event.destroy
+        respond_to do |format|
+            format.html {redirect_to pending_events_list_course_path(@course.id)}
+            #format.js
+        end
     end
 
     private
@@ -85,9 +110,12 @@ class EventsController < ApplicationController
     end
 
     #Assigns class names to events so that I can color code them in CSS
-    def save_className(event)
-        current_user.role=="Professor" ? event.className="prof-event" : event.className="student-event"
+    def set_className(event)
+        current_user.isProf ? event.className="prof-event" : event.className="student-event"
         event.className="private-event" if event.private
-        event.save
+    end
+
+    def set_pending_approval(event)
+        event.pending_approval=false if current_user.isProf || event.isPrivate
     end
 end

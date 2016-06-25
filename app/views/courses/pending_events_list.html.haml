@@ -1,0 +1,17 @@
+.wrapper_with_padding
+    .back-btn
+        %i.fa.fa-long-arrow-left
+        =link_to "Back To #{@course.course_name}", course_events_path(@course.id)
+    .pending-events-container
+        %h1 Events pending your approval:
+        .course-pending-list
+            %h2 #{@course.course_name}
+            %hr
+            .pending-event-list
+                - get_pending_events(@course.id).each do |event|
+                    .pending-event
+                        .pending-event-title
+                            =link_to "#{event.title}", course_event_path(event.course_id, event.id)
+                        .pending-buttons
+                            =link_to "", approve_course_event_path(event.course_id, event.id), class: "i fa fa-check-circle-o"
+                            =link_to "", deny_course_event_path(event.course_id, event.id), class: "i fa fa-times-circle-o"

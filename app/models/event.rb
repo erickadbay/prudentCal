@@ -14,7 +14,11 @@ class Event < ActiveRecord::Base
     }
     end
 
-  def self.format_date(date_time)
-    Time.at(date_time.to_i).to_formatted_s(:db)
-  end
+    def self.format_date(date_time)
+        Time.at(date_time.to_i).to_formatted_s(:db)
+    end
+
+    def isPrivate
+        self.private == true
+    end
 end

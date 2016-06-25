@@ -14,7 +14,7 @@
 			= link_to image_tag( 'prudentcal_logo.png'), root_path, id: "logo"
 			%nav
 				- if user_signed_in?
-					-if current_user.role=="Professor"
+					-if current_user.isProf
 						= link_to "New Course", new_course_path
 					= link_to "Sign Out", destroy_user_session_path, method: :delete
 				- else

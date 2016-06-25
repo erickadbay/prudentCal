@@ -20,6 +20,17 @@
     h1{
         font-family: 'Brandon Grotesque Med', "Helvetica Neue", Helvetica, sans-serif;
         text-align: center;
-    	padding-bottom: 20px;
+    	padding-bottom: 10px;
 	}
+}
+
+.pending-container{
+    float: right;
+    padding: 10px 70px;
+}
+
+.course{
+    position: relative;
+    display: table;
+    margin: 0 auto;
 }

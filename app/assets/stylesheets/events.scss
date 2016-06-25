@@ -9,7 +9,7 @@
 }
 
 .calendar-container{
-    padding: 0 150px 70px 150px;
+    padding-bottom: 70px;
     h1{
         color: $green;
         text-align: center;
@@ -74,6 +74,27 @@
 
 .edit-event-form{
     margin-top: 100px;
+}
+
+.pending-events-container{
+    h2, .pending-event{
+        text-align: center;
+    }
+
+    h2{
+        margin: 10px;
+    }
+    hr{
+        width: 25%;
+    }
+
+    .pending-event-title, .pending-buttons{
+        display: inline-block;
+    }
+
+    .pending-buttons{
+        padding-left: 20px;
+    }
 }
 
 @media (max-width: $breakpoint-mobile) {

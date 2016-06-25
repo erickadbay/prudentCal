@@ -1,7 +1,10 @@
 class CoursesController < ApplicationController
-    before_action :find_course, only: [:show, :edit, :update, :destroy]
+    before_action :find_course, only: [:show, :edit, :update, :destroy, :pending_events_list]
+    before_action :get_courses, only: [:index, :new]
+
+    helper EventsHelper
+
     def index
-        @course=current_user.courses
     end
 
     def show
@@ -9,7 +12,7 @@ class CoursesController < ApplicationController
     end
 
     def new
-        @course = current_user.courses.build
+        @course = @courses.build
     end
 
     def create
@@ -24,6 +27,9 @@ class CoursesController < ApplicationController
         end
     end
 
+    def pending_events_list
+        @pending_events_list = Event.where("course_id = ? AND pending_approval = ?", @course.id, true)
+    end
     private
     def find_course
         @course=Course.includes(:events).find(params[:id])
@@ -31,5 +37,9 @@ class CoursesController < ApplicationController
 
     def course_params
         params.require(:course).permit(:course_name)
+    end
+
+    def get_courses
+        @courses = current_user.courses
     end
 end
