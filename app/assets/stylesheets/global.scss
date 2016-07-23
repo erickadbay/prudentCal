@@ -152,6 +152,27 @@ label{
     padding-right: 10px;
 }
 
+header{
+    z-index: 10;
+}
+
+.event-show{
+    padding-top: 100px;
+    text-align: center;
+}
+
+.new-event-btn{
+    float: right;
+    padding: 7px 20px;
+    border-radius: 20px;
+    color: $green;
+}
+
+.fc-event-container a{
+    background-color: $green;
+    border-color: $green;
+}
+
 input[type="text"], input[type="email"], input[type="password"], textarea {
 	width: 100%;
 	margin-bottom: 1rem;
