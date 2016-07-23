@@ -83,7 +83,6 @@ class EventsController < ApplicationController
         @event.save
         respond_to do |format|
             format.html {redirect_to pending_events_list_course_path(@course.id)}
-            # => format.js
         end
     end
 
@@ -92,7 +91,6 @@ class EventsController < ApplicationController
         @event.destroy
         respond_to do |format|
             format.html {redirect_to pending_events_list_course_path(@course.id)}
-            #format.js
         end
     end
 
