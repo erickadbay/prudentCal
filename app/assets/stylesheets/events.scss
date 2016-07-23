@@ -1,0 +1,135 @@
+// Place all the styles related to the events controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#modal{
+    h3, .form-fields{
+        text-align: center;
+    }
+}
+
+.calendar-container{
+    padding-bottom: 70px;
+    h1{
+        color: $green;
+        text-align: center;
+        margin-top: -35px;
+    }
+    .legend-container{
+        padding-top: 20px;
+    }
+    .legend{
+        display: inline-block;
+        p{
+            display: inline-block;
+            padding: 0 5px;
+            margin: 0;
+        }
+    }
+    .legend-icon{
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        border-radius: 3px;
+    }
+    #prof-icon{
+        background: $red;
+    }
+    #student-icon{
+        background: $green;
+    }
+    #private-icon{
+        background: $blue;
+    }
+    .new-event-btn{
+        float: right;
+        padding: 7px 20px;
+        border-radius: 20px;
+        color: $green;
+    }
+    #calendar{
+        padding-top: 30px;
+    }
+    .fc-button{
+        border-radius: 2px;
+    }
+    .prof-event{
+        background-color: $red !important;
+        border: none !important;
+    }
+    .student-event{
+        background-color: $green !important;
+        border-color: $green !important;
+    }
+    .private-event{
+        background-color: $blue !important;
+        border-color: $blue !important;
+    }
+}
+
+.event{
+    padding-top: 100px;
+    text-align: center;
+}
+
+.edit-event-form{
+    margin-top: 100px;
+}
+
+.pending-events-container{
+    h2, .pending-event{
+        text-align: center;
+    }
+
+    h2{
+        margin: 10px;
+    }
+    hr{
+        width: 25%;
+    }
+
+    .pending-event-title, .pending-buttons{
+        display: inline-block;
+    }
+
+    .pending-buttons{
+        padding-left: 20px;
+    }
+}
+
+@media (max-width: $breakpoint-mobile) {
+	.calendar-container{
+        padding: 0 30px;
+        h1{
+            margin-top: 10px;
+        }
+        .legend-container{
+            padding-top: 0;
+        }
+        .legend{
+            display: inline-block;
+            text-align: center;
+            p{
+                display: inline-block;
+                padding: 0 5px;
+                margin: 0;
+                font-size: 14px;
+            }
+        }
+        .legend-icon{
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            border-radius: 3px;
+        }
+        .new-event-btn{
+            margin-top: -125px;
+        }
+        .fc-toolbar{
+            margin-bottom: 0;
+        }
+        .fc-center{
+            padding: 10px;
+        }
+    }
+}

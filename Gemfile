@@ -16,8 +16,7 @@ gem 'coffee-rails', '~> 4.1.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -36,10 +35,14 @@ gem 'simple_form', '~> 3.2', '>= 3.2.1'
 gem 'devise', '~> 3.5', '>= 3.5.5'
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
+gem 'jquery-turbolinks'
+gem 'client_side_validations-simple_form', '~> 3.2', '>= 3.2.3'
+gem "rspec-rails", :group => [:test, :development]
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'railroady'
 end
 
 group :development do
@@ -48,4 +51,13 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'guard'
+  gem 'guard-livereload', '~> 2.5', require: false
+end
+
+group :test do
+  gem 'simplecov'
+  gem "factory_girl_rails"
+  gem "capybara"
+  gem "guard-rspec"
 end

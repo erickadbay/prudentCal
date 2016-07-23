@@ -1,7 +1,7 @@
-= simple_form_for @event, url: course_event_path(@course.id, @event.id) do |f|
-    = f.input :title
+= simple_form_for @event, validate: true, url: course_event_path(@course.id, @event.id) do |f|
+    = f.input :title, required: true
     .form-fields
-        = f.input :event_date
-        = f.input :start_time
-        = f.input :end_time
-        = f.button :submit
+        = f.input :start_time, label: 'Starts: '
+        = f.input :end_time, label: 'Ends: '
+        = f.input :private, label: 'Private event?'
+        = f.button :submit, class: "button", id: "submitbtn"

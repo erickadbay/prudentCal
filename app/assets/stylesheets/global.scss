@@ -1,38 +1,11 @@
-$dark_gray: #2B2E2E;
-$light_gray: #C0C1C1;
-$green: #33CD99;
-
-@font-face {
-    font-family: 'BrandonGrotesqueBlk';
-    src:font-url('BrandonGrotesque-Black.ttf');
-}
-@font-face {
-    font-family: 'BrandonGrotesqueBold';
-    src:font-url('BrandonGrotesque-Bold.ttf');
-}
-@font-face {
-    font-family: 'BrandonGrotesqueLight';
-    src:font-url('BrandonGrotesque-Light.ttf');
-}
-@font-face {
-    font-family: 'BrandonGrotesqueMed';
-    src:font-url('BrandonGrotesque-Medium.ttf');
-}
-
-@mixin bold_font {
-	font-family: 'BrandonGrotesqueMed',"Helvetica Neue", Helvetica, sans-serif;
-	font-weight: bold;
-	text-transform: uppercase;
-}
-
-* {
+*{
 	box-sizing: border-box;
 	-webkit-font-smoothing: antialiased;
 }
 
 body {
 	padding-top: 4.5rem;
-	font-family: 'BrandonGrotesqueMed',"Helvetica Neue", Helvetica, sans-serif;
+	font-family: 'Brandon Grotesque Med',"Helvetica Neue", Helvetica, sans-serif;
 }
 
 .wrapper {
@@ -128,30 +101,16 @@ footer {
 	}
 }
 
-#courses{
-	padding-top: 100px;
-}
-
-.course{
-	text-align: center;
-	padding-bottom: 10px;
-	h1{
-		font-family: 'BrandonGrotesqueMed',"Helvetica Neue", Helvetica, sans-serif;
-	}
-}
-
-.container{
-	text-align: center;
-	padding-top: 50px;
+.deviseform{
+    padding: 70px 150px;
 }
 
 .form{
-    padding:100px 400px;
-}
-
-.event{
-    text-align: center;
-    padding: 100px 0;
+    padding:0px 400px;
+    margin-top: -50px;
+    h1{
+        text-align: center;
+    }
 }
 
 .form-fields{
@@ -160,36 +119,37 @@ footer {
     }
 }
 
-.top-container{
-    padding-left: 70px;
-    padding-top: 30px
+.button-container{
+    .pending-button{
+        display: inline-block;
+        float: right;
+		position: relative;
+
+		#in-events{
+			top: -15px;
+		}
+    }
+	h1{
+		text-align: center;
+		color: $green;
+	}
 }
 
 .back-btn{
-    padding-left: 70px;
-    margin-top: 100px;
-    i{
-        color:$green;
-    }
-    &:hover{
-        text-decoration: underline;
-    }
+	display: inline-block;
+	i{
+		color:$green;
+	}
+	&:hover{
+		text-decoration: underline;
+	}
+}
+header{
+    z-index: 10;
 }
 
-.calendar-container{
-    padding: 0 70px 70px 70px;
-    h1{
-        text-align: center;
-        margin-top: -35px;
-    }
-}
-
-#calendar{
-    padding-top: 50px;
-}
-
-.aligned-container{
-    padding-left: 70px;
+label{
+    padding-right: 10px;
 }
 
 header{
@@ -226,4 +186,33 @@ input[type="text"], input[type="email"], input[type="password"] {
 
 textarea {
 	min-height: 200px;
+}
+
+.error{
+	color: #ff1f1f;
+}
+
+.counter {
+    text-align: center;
+    position: absolute;
+    top: 10px;
+    right: -20px;
+    background-color: $red;
+    color: $white;
+    border-radius: 20px;
+    padding: 3px 8px;
+    font-size: 12px;
+}
+
+@media (max-width: $breakpoint-tablet) {
+
+}
+@media (max-width: $breakpoint-mobile) {
+	.deviseform{
+		padding: 70px;
+	}
+	.back-btn{
+		padding-left: 30px;
+    	margin-top: 50px;
+	}
 }

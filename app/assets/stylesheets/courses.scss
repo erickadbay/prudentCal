@@ -1,3 +1,36 @@
 // Place all the styles related to the courses controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#welcome_message{
+    width: 100%;
+    position: absolute;
+    background-color: $green;
+    opacity: 0.85;
+    z-index: 999;
+    h3{
+        color: $white;
+        text-align: center;
+        font-weight: 700;
+    }
+}
+
+.courses{
+	padding-top: 170px;
+    h1{
+        font-family: 'Brandon Grotesque Med', "Helvetica Neue", Helvetica, sans-serif;
+        text-align: center;
+    	padding-bottom: 10px;
+	}
+}
+
+.pending-container{
+    float: right;
+    padding: 10px 70px;
+}
+
+.course{
+    position: relative;
+    display: table;
+    margin: 0 auto;
+}

@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  course_name: MyString
-  user_id: 
+  course_name: SYSC 2006
+  id: 1
+  user_id: 1
 
 two:
-  course_name: MyString
-  user_id: 
+  course_name: SYSC 3110
+  id: 2
+  user_id: 2

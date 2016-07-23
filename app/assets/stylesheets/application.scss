@@ -13,7 +13,11 @@
  *= require_self
  *= require fullcalendar
  */
- @import 'global.css.scss';
- @import 'welcome.css.scss';
- @import 'normalize.css.scss';
+ @import 'variables.scss';
+ @import 'global.scss';
+ @import 'courses.scss';
+ @import 'modal.scss';
+ @import 'events.scss';
+ @import 'welcome.scss';
+ @import 'normalize.scss';
  @import "fullcalendar";

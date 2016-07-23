@@ -1,0 +1,8 @@
+$('#modal h3').html("<i class='glyphicon glyphicon-plus'></i> Add New Event");
+$('.modal-body').html('<%= j render("form") %>');
+$('#modal').modal("show");
+$('.first_input').focus();
+$('#modal').on('shown.bs.modal', function () {
+	  $('form[data-validate]').enableClientSideValidations();
+  });
+console.log("New action triggered");

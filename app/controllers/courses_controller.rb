@@ -1,19 +1,24 @@
 class CoursesController < ApplicationController
-    before_action :find_course, only: [:show, :edit, :update, :destroy]
+    before_action :find_course, only: [:show, :edit, :update, :destroy, :pending_events_list]
+    before_action :get_courses, only: [:index, :new]
+
+    helper EventsHelper
+
     def index
-        @course=current_user.courses
     end
 
     def show
+        redirect_to course_events_path(@course.id)
     end
 
     def new
-        @course = current_user.courses.build
+        @course = @courses.build
     end
 
     def create
         @course = Course.new(course_params)
         @users=User.where(:id=>params[:students])
+        @course.user_id=current_user.id if current_user
         @course.users << @users
         if @course.save
             redirect_to @course
@@ -22,24 +27,9 @@ class CoursesController < ApplicationController
         end
     end
 
-    def edit
+    def pending_events_list
+        @pending_events_list = Event.where("course_id = ? AND pending_approval = ?", @course.id, true)
     end
-
-    def update
-        @users=User.where(:id=>params[:students])
-        @course.users << @users
-        if @course.update(course_params)
-            redirect_to @course
-        else
-            render 'edit'
-        end
-    end
-
-    def destroy
-        @course.destroy
-        redirect_to courses_path
-    end
-
     private
     def find_course
         @course=Course.includes(:events).find(params[:id])
@@ -47,5 +37,9 @@ class CoursesController < ApplicationController
 
     def course_params
         params.require(:course).permit(:course_name)
+    end
+
+    def get_courses
+        @courses = current_user.courses
     end
 end

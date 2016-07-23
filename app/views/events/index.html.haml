@@ -1,55 +1,29 @@
-.back-btn
-    %i.fa.fa-long-arrow-left
-    =link_to "Back to COURSES", courses_path
--#
-.calendar-container
-    %h1= @course.course_name
-    %button.new-event-btn
-        = link_to "New Event", new_course_event_path
-    #calendar
-
--#
-    .container
-
-        = link_to "New Event", new_course_event_path
-        - @event.each do |e|
-            %h2= link_to e.title, course_event_path(e.course_id, e.id)
-            %p
-                %strong Date:
-                #{e.event_date}
-            %p
-                %strong Start time:
-                #{e.start_time.hour}:#{e.start_time.min}
-            %p
-                %strong End time:
-                #{e.end_time.hour}:#{e.end_time.min}
-    -#
-        - if current_user.role=="Professor"
-            %h1 IM A PROF!
-            - @course.users.each do |u|
-                %p #{u.email}
-                - u.courses.each do |c|
-                    -c.events.each do |e|
-                        %h2= link_to e.title, course_event_path(e.course_id, e.id)
-                        %p
-                            %strong Date:
-                            #{e.event_date}
-                        %p
-                            %strong Start time:
-                            #{e.start_time.hour}:#{e.start_time.min}
-                        %p
-                            %strong End time:
-                            #{e.end_time.hour}:#{e.end_time.min}
-        - else
-            %h1 IM A STUDENT!
-            - @event.each do |e|
-                %h2= link_to e.title, course_event_path(e.course_id, e.id)
-                %p
-                    %strong Date:
-                    #{e.event_date}
-                %p
-                    %strong Start time:
-                    #{e.start_time.hour}:#{e.start_time.min}
-                %p
-                    %strong End time:
-                    #{e.end_time.hour}:#{e.end_time.min}
+.wrapper_with_padding
+    =render 'modal'
+    .button-container
+        .back-btn
+            %i.fa.fa-long-arrow-left
+            =link_to "Back To Courses", courses_path
+        - if current_user.isProf
+            .pending-button
+                - @pending_events = count_pending_events(@course.id)
+                - if @pending_events >0
+                    = link_to "Events pending your approval", pending_events_list_course_path(@course.id)
+                    .counter#in-events
+                        %span #{@pending_events}
+        %h1= @course.course_name
+    .calendar-container
+        -# %h1= @course.course_name
+        .legend-container
+            .legend
+                .legend-icon#prof-icon
+                %p Professor event
+            .legend
+                .legend-icon#student-icon
+                %p Student event
+            .legend
+                .legend-icon#private-icon
+                %p Private event
+            %button.new-event-btn
+                = link_to "New Event", new_course_event_path, remote: true
+        #calendar
