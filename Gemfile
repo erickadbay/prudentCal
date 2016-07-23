@@ -37,6 +37,7 @@ gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 gem 'jquery-turbolinks'
 gem 'client_side_validations-simple_form', '~> 3.2', '>= 3.2.3'
+gem "rspec-rails", :group => [:test, :development]
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -56,4 +57,7 @@ end
 
 group :test do
   gem 'simplecov'
+  gem "factory_girl_rails"
+  gem "capybara"
+  gem "guard-rspec"
 end

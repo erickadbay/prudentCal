@@ -8,10 +8,10 @@ class EventsController < ApplicationController
             if current_user.isProf
                 @event=[]
                 #Using includes greatly reduces the number of queries. Let's test it to see how it holds up
-                @course.users.where(:role => "Student").includes(:courses).each do |u|
-                    u.courses.each do |c|
+                @course.users.where(:role => "Student").includes(:courses).each do |user|
+                    user.courses.includes(:events).each do |course|
                         #Where not ignores events that are private and not mine
-                        @event.concat(Event.where("course_id = ? AND pending_approval=?", c.id, false).where.not("user_id != ? AND private = ?", current_user.id, true))
+                        @event.concat(course.events.where("course_id = ? AND pending_approval=?", course.id, false).where.not("user_id != ? AND private = ?", current_user.id, true))
                     end
                 end
                 @event.uniq! #In case there are students taking the same classes

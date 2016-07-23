@@ -36,12 +36,20 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    addressable (2.4.0)
     arel (6.0.3)
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     builder (3.2.2)
     byebug (8.2.2)
+    capybara (2.7.1)
+      addressable
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
     client_side_validations (4.2.4)
       jquery-rails (>= 3.1.2, < 5.0.0)
       js_regex (~> 1.0, >= 1.0.9)
@@ -66,6 +74,7 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    diff-lcs (1.2.5)
     docile (1.1.5)
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
@@ -73,6 +82,11 @@ GEM
     erubis (2.7.0)
     eventmachine (1.2.0.1)
     execjs (2.6.0)
+    factory_girl (4.7.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.7.0)
+      factory_girl (~> 4.7.0)
+      railties (>= 3.0.0)
     ffi (1.9.10)
     formatador (0.2.5)
     fullcalendar-rails (2.6.0.0)
@@ -96,6 +110,10 @@ GEM
       guard (~> 2.8)
       guard-compat (~> 1.0)
       multi_json (~> 1.8)
+    guard-rspec (4.7.2)
+      guard (~> 2.1)
+      guard-compat (~> 1.1)
+      rspec (>= 2.99.0, < 4.0)
     haml (4.0.7)
       tilt
     http_parser.rb (0.6.0)
@@ -179,6 +197,27 @@ GEM
     regexp_parser (0.3.6)
     responders (2.1.1)
       railties (>= 4.2.0, < 5.1)
+    rspec (3.4.0)
+      rspec-core (~> 3.4.0)
+      rspec-expectations (~> 3.4.0)
+      rspec-mocks (~> 3.4.0)
+    rspec-core (3.4.4)
+      rspec-support (~> 3.4.0)
+    rspec-expectations (3.4.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-mocks (3.4.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.4.0)
+    rspec-rails (3.4.2)
+      actionpack (>= 3.0, < 4.3)
+      activesupport (>= 3.0, < 4.3)
+      railties (>= 3.0, < 4.3)
+      rspec-core (~> 3.4.0)
+      rspec-expectations (~> 3.4.0)
+      rspec-mocks (~> 3.4.0)
+      rspec-support (~> 3.4.0)
+    rspec-support (3.4.1)
     ruby_dep (1.3.1)
     sass (3.4.21)
     sass-rails (5.0.4)
@@ -226,18 +265,23 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    xpath (2.0.0)
+      nokogiri (~> 1.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   byebug
+  capybara
   client_side_validations-simple_form (~> 3.2, >= 3.2.3)
   coffee-rails (~> 4.1.0)
   devise (~> 3.5, >= 3.5.5)
+  factory_girl_rails
   fullcalendar-rails
   guard
   guard-livereload (~> 2.5)
+  guard-rspec
   haml (~> 4.0, >= 4.0.7)
   jbuilder (~> 2.0)
   jquery-rails
@@ -245,6 +289,7 @@ DEPENDENCIES
   momentjs-rails
   railroady
   rails (= 4.2.5.1)
+  rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   simple_form (~> 3.2, >= 3.2.1)
