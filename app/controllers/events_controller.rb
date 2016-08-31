@@ -3,6 +3,11 @@ class EventsController < ApplicationController
     before_action :find_event, only: [:show, :edit, :update, :approve, :deny]
 
     helper EventsHelper
+
+    $approved = "Approved"
+    $denied = "Denied"
+    $pending = "Pending approval"
+
     def index
         if current_user.courses.include?(@course)
             if current_user.isProf
@@ -11,12 +16,12 @@ class EventsController < ApplicationController
                 @course.users.where(:role => "Student").includes(:courses).each do |user|
                     user.courses.includes(:events).each do |course|
                         #Where not ignores events that are private and not mine
-                        @event.concat(course.events.where("course_id = ? AND pending_approval=?", course.id, false).where.not("user_id != ? AND private = ?", current_user.id, true))
+                        @event.concat(course.events.where("course_id = ? AND status=?", course.id, $approved).where.not("user_id != ? AND private = ?", current_user.id, true))
                     end
                 end
                 @event.uniq! #In case there are students taking the same classes
             else #Current user is a student
-                @event=Event.where("course_id = ? AND pending_approval=?", @course.id, false).where.not("user_id != ? AND private=?", current_user.id, true)
+                @event=Event.where("course_id = ? AND status=?", @course.id, $approved).where.not("user_id != ? AND private=?", current_user.id, true)
             end
 
             cookies[:course_id]=@course.id
@@ -44,10 +49,11 @@ class EventsController < ApplicationController
     def create
         @event = @course.events.create(event_params)
         @event.user_id=current_user.id if current_user
-
-        set_pending_approval(@event)
+        @event.creator = current_user.first_name+" "+current_user.last_name
+        set_pending_decision(@event)
+        set_event_status(@event)
         set_className(@event)
-
+        gon.user = current_user.isProf
         @event.save
         respond_to do |format|
             if @event.save
@@ -79,20 +85,19 @@ class EventsController < ApplicationController
     end
 
     def approve
-        @event.pending_approval = false
+        @event.pending_decision = false
+        @event.status=$approved
         @event.save
         respond_to do |format|
-            format.html {redirect_to pending_events_list_course_path(@course.id)}
-            # => format.js
+            format.js
         end
     end
 
     def deny
-        @event = @course.events.find(params[:id])
-        @event.destroy
+        @event.status=$denied
+        @event.save
         respond_to do |format|
-            format.html {redirect_to pending_events_list_course_path(@course.id)}
-            #format.js
+            format.js
         end
     end
 
@@ -112,10 +117,14 @@ class EventsController < ApplicationController
     #Assigns class names to events so that I can color code them in CSS
     def set_className(event)
         current_user.isProf ? event.className="prof-event" : event.className="student-event"
-        event.className="private-event" if event.private
+        event.className="private-event" if event.isPrivate
     end
 
-    def set_pending_approval(event)
-        event.pending_approval=false if current_user.isProf || event.isPrivate
+    def set_pending_decision(event)
+        event.pending_decision=false if current_user.isProf || event.isPrivate
+    end
+
+    def set_event_status(event)
+        event.status = current_user.isProf || event.isPrivate ? $approved : $pending
     end
 end

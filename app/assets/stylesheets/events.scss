@@ -77,23 +77,55 @@
 }
 
 .pending-events-container{
-    h2, .pending-event{
+    h1, .pending-event{
+        text-align: center;
+        width: 100%;
+    }
+
+    h1{
+        margin: 10px;
+    }
+
+    p{
         text-align: center;
     }
 
-    h2{
-        margin: 10px;
-    }
-    hr{
-        width: 25%;
+    .pending-event{
+        overflow: auto;
     }
 
     .pending-event-title, .pending-buttons{
-        display: inline-block;
+        width: 50%;
+        float: left;
+    }
+
+    .pending-event-title{
+        text-align: right;
     }
 
     .pending-buttons{
+        text-align: left;
         padding-left: 20px;
+        p{
+            margin: 0;
+            text-align: left;
+        }
+    }
+
+    .pending-event-list{
+        font-size: 20px;
+    }
+
+    .status-approved{
+        color: $blue;
+    }
+
+    .status-denied{
+        color: $red;
+    }
+
+    .status-pending{
+        color: $yellow;
     }
 }
 

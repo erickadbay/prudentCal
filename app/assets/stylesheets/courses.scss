@@ -2,10 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#welcome_message{
+#welcome_message, #after_create_message{
     width: 100%;
     position: absolute;
-    background-color: $green;
+
     opacity: 0.85;
     z-index: 999;
     h3{
@@ -13,6 +13,14 @@
         text-align: center;
         font-weight: 700;
     }
+}
+
+#welcome_message{
+    background-color: $green;
+}
+
+#after_create_message{
+    background-color: $yellow;
 }
 
 .courses{
