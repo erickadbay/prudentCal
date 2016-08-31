@@ -28,7 +28,11 @@ class CoursesController < ApplicationController
     end
 
     def pending_events_list
-        @pending_events_list = Event.where("course_id = ? AND pending_approval = ?", @course.id, true)
+        if current_user.isProf
+            @pending_events_list = @course.events.where("pending_decision = ?", true)
+        else
+            @pending_events_list = Event.where("user_id = ?", current_user.id)
+        end
     end
     private
     def find_course

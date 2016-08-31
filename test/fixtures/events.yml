@@ -2,14 +2,12 @@
 
 one:
   title: MyString
-  event_date: 2016-02-15
   start_time: 2016-02-15 02:27:10
   end_time: 2016-02-15 02:27:10
   course_id: 1
 
 two:
   title: MyString
-  event_date: 2016-02-15
   start_time: 2016-02-15 02:27:10
   end_time: 2016-02-15 02:27:10
   course_id: 2
