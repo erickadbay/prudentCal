@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160831173146) do
+ActiveRecord::Schema.define(version: 20161004123959) do
 
   create_table "courses", force: :cascade do |t|
     t.string   "course_name"
@@ -39,7 +39,6 @@ ActiveRecord::Schema.define(version: 20160831173146) do
     t.boolean  "private",          default: false
     t.boolean  "pending_decision", default: true
     t.string   "status"
-    t.string   "creator"
   end
 
   add_index "events", ["course_id"], name: "index_events_on_course_id"

@@ -1,7 +1,7 @@
 $(document).ready(function() {
-    $('#welcome_message').fadeIn(700, function(){
+    $('#success_banner').fadeIn(700, function(){
         setTimeout(function(){
-            $('#welcome_message').fadeOut(700);
+            $('#success_banner').fadeOut(700);
         }, 2000);
     });
 });

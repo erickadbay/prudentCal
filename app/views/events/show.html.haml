@@ -13,7 +13,7 @@
             #{@event.start_time.to_formatted_s(:long)}
         %p
             %strong Posted by:
-            - if @event.user.isProf
+            - if @event.user.isProf?
                 Prof.
             #{@event.user.first_name} #{@event.user.last_name}
         %p

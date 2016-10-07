@@ -1,15 +1,3 @@
-$dark_gray: #2B2E2E;
-$light_gray: #C0C1C1;
-$green: #33CD99;
-$white: #FFFFFF;
-$red: #EF473A;
-$blue: #14A5CC;
-$yellow: #f0ad4e;
-
-$breakpoint-mobile: 768px;
-$breakpoint-tablet: 992px;
-
-
 @font-face {
     font-family: 'Brandon Grotesque Black';
     src:font-url('BrandonGrotesque-Black.ttf');
@@ -32,3 +20,16 @@ $breakpoint-tablet: 992px;
 	font-weight: bold;
 	text-transform: uppercase;
 }
+
+$dark_gray: #2B2E2E;
+$light_gray: #C0C1C1;
+$green: #33CD99;
+$white: #FFFFFF;
+$red: #EF473A;
+$blue: #14A5CC;
+$yellow: #f0ad4e;
+
+$breakpoint-mobile: 768px;
+$breakpoint-tablet: 992px;
+
+$font-stack: 'Brandon Grotesque Med', "Helvetica Neue", Helvetica, sans-serif;

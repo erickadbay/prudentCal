@@ -1,2 +1,10 @@
 $('#modal').modal('hide');
-$('#calendar').fullCalendar('refetchEvents');
+if (<%= current_user.isProf? %>){
+    $('#calendar').fullCalendar('refetchEvents');
+}
+
+$('#success_banner').fadeIn(700, function(){
+    setTimeout(function(){
+        $('#success_banner').fadeOut(700);
+    }, 2000);
+});
