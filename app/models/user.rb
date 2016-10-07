@@ -6,7 +6,9 @@ class User < ActiveRecord::Base
     has_and_belongs_to_many :courses
     has_many :events
 
-    def isProf
+    scope :students, -> { where(:role => "Student") }
+    
+    def isProf?
         self.role=="Professor"
     end
 end

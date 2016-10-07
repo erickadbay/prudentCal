@@ -1,8 +1,8 @@
 class CoursesController < ApplicationController
+    helper EventsHelper
+
     before_action :find_course, only: [:show, :edit, :update, :destroy, :pending_events_list]
     before_action :get_courses, only: [:index, :new]
-
-    helper EventsHelper
 
     def index
     end
@@ -28,12 +28,9 @@ class CoursesController < ApplicationController
     end
 
     def pending_events_list
-        if current_user.isProf
-            @pending_events_list = @course.events.where("pending_decision = ?", true)
-        else
-            @pending_events_list = Event.where("user_id = ?", current_user.id)
-        end
+        @pending_events_list = current_user.isProf? ? @course.events.pending : current_user.events.in_course(@course.id)
     end
+
     private
     def find_course
         @course=Course.includes(:events).find(params[:id])
