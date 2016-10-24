@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#success_banner, #danger_banner{
+#success_banner, #danger_banner, #welcome_message{
     width: 100%;
     position: fixed;
 
@@ -15,7 +15,7 @@
     }
 }
 
-#success_banner{
+#success_banner, #welcome_message{
     background-color: $green;
 }
 

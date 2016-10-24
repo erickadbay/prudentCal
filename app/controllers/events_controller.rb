@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
     #helper EventsHelper
-    before_action :find_course, only: [:show,:index, :create,:new, :edit, :update, :destroy, :approve, :deny]
-    before_action :find_event, only: [:show, :edit, :update, :approve, :deny]
+    before_action :find_course
+    before_action :find_event, only: [:show, :edit, :update, :approve, :deny, :pending_event]
 
     def index
         if @course && current_user.courses.include?(@course)
@@ -9,7 +9,7 @@ class EventsController < ApplicationController
                 courses=[]
                 #Eager loading greatly reduces the number of queries.
                 @course.users.students.includes(:courses).each{ |u| courses<<u.courses.map(&:id) }
-                @event = Event.in_courses(courses)
+                @event = Event.inCourses(courses)
             else #Current user is a student
                 @event = @course.events
             end
@@ -41,9 +41,7 @@ class EventsController < ApplicationController
     def create
         @event = @course.events.create(event_params)
         @event.user_id=current_user.id if current_user
-        @event.set_pending_decision(current_user)
-        @event.set_event_status(current_user)
-        @event.set_className(current_user)
+        @event.decorate(current_user)
         respond_to do |format|
             if @event.save
                 format.json { head :no_content }
@@ -58,8 +56,8 @@ class EventsController < ApplicationController
     end
 
     def update
+        @event.set_className(current_user)
         if @event.update(event_params)
-            @event.set_className(current_user)
             redirect_to course_event_path(@course.id, @event.id)
         else
             render 'edit'
@@ -76,6 +74,7 @@ class EventsController < ApplicationController
         @event.approve
         @event.save
         respond_to do |format|
+            format.html { redirect_to course_pending_events_path(@course.id) }
             format.js
         end
     end
@@ -84,8 +83,17 @@ class EventsController < ApplicationController
         @event.deny
         @event.save
         respond_to do |format|
+            format.html { redirect_to course_pending_events_path(@course.id) }
             format.js
         end
+    end
+
+    def pending_events
+        @pending_events_list = current_user.isProf? ? @course.events.pending : current_user.events.inCourses(@course.id).paginate(page: params[:page], per_page: 5)
+    end
+
+    def pending_event
+        render 'show'
     end
 
     private

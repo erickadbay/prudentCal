@@ -68,65 +68,51 @@
 }
 
 .event{
-    padding-top: 100px;
+    padding: 50px;
+    width: 400px;
     text-align: center;
+    margin: 50px auto;
+    background-color: $lighter_gray;
+    border-radius: 20px;
 }
 
 .edit-event-form{
     margin-top: 100px;
 }
 
+#approve-btn, #deny-btn{
+    font-size: 24px;
+}
+
 .pending-events-container{
-    h1, .pending-event{
+    h1, p{
         text-align: center;
+        margin: 10px;
         width: 100%;
     }
+}
 
-    h1{
-        margin: 10px;
+.pending-event-list{
+    font-size: 20px;
+    padding: 20px 0;
+    table{
+        margin: 0 auto;
     }
+    th, td{
+        padding: 5px 10px;
+    }
+}
 
-    p{
-        text-align: center;
-    }
+.status-approved{
+    color: $blue;
+}
 
-    .pending-event{
-        overflow: auto;
-    }
+.status-denied{
+    color: $red;
+}
 
-    .pending-event-title, .pending-buttons{
-        width: 50%;
-        float: left;
-    }
-
-    .pending-event-title{
-        text-align: right;
-    }
-
-    .pending-buttons{
-        text-align: left;
-        padding-left: 20px;
-        p{
-            margin: 0;
-            text-align: left;
-        }
-    }
-
-    .pending-event-list{
-        font-size: 20px;
-    }
-
-    .status-approved{
-        color: $blue;
-    }
-
-    .status-denied{
-        color: $red;
-    }
-
-    .status-pending{
-        color: $yellow;
-    }
+.status-pending{
+    color: $yellow;
 }
 
 @media (max-width: $breakpoint-mobile) {

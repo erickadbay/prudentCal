@@ -1,19 +1,17 @@
 class Event < ActiveRecord::Base
     belongs_to :course
     belongs_to :user
+    has_many :comments, dependent: :destroy
 
-    $approved = "Approved"
-    $denied = "Denied"
-    $pending = "Pending approval"
+    @@approved = "Approved"
+    @@denied = "Denied"
+    @@pending = "Pending approval"
 
     validates :title, presence: true
 
-    scope :in_courses, -> (courses) { where(course_id: courses.flatten.uniq!) }
-    scope :in_course, -> (course_id) { where(course_id: course_id) }
-    scope :approved, -> { where(status: $approved) }
+    scope :approved, -> { where(status: @@approved) }
     scope :not_my_private, -> (user) { where.not("user_id != ? AND private = ?", user.id, true) }
     scope :pending, -> { where(pending_decision: true) }
-    scope :my_public, -> (user) { where("user_id = ? AND private = ?", user.id, false) }
 
     def as_json(options = {})
         {
@@ -30,31 +28,37 @@ class Event < ActiveRecord::Base
         Time.at(date_time.to_i).to_formatted_s(:db)
     end
 
+    def self.inCourses(courses)
+        courses.is_a?(Array) ? where(course_id: courses.flatten.uniq!) : where(course_id: courses)
+    end
+
     def isPrivate?
         self.private == true
     end
 
     def approve
         self.pending_decision = false
-        self.status=$approved
+        self.status=@@approved
     end
 
     def deny
         self.pending_decision = false
-        self.status=$denied
-    end
-
-    def set_event_status(user)
-        self.status = user.isProf? || self.isPrivate? ? $approved : $pending
-    end
-
-    def set_pending_decision(user)
-        self.pending_decision=false if user.isProf? || self.isPrivate?
+        self.status=@@denied
     end
 
     #Assigns class names to events so that I can color code them in CSS
     def set_className(user)
         user.isProf? ? self.className="prof-event" : self.className="student-event"
         self.className="private-event" if self.isPrivate?
+    end
+
+    def decorate(user)
+        if user.isProf? || self.isPrivate?
+            self.status = @@approved
+            self.pending_decision=false
+        else
+            self.status = @@pending
+        end
+        self.set_className(user)
     end
 end

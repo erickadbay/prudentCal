@@ -1,25 +1,19 @@
 #success_banner{:style => "display: none;"}
     - if user_signed_in?
-        - if current_user.isProf?
-            %h3 Thank you adding your event to PrudentCAL. Your event will now be visible to everyone enrolled in this course.
-        - else
-            %h3 Thank you adding your event to PrudentCAL. Your event was sent to your Professor for approval.
+        %h3
 .wrapper_with_padding
     =render 'modal'
     .button-container
         .back-btn
             %i.fa.fa-long-arrow-left
             =link_to "Back To Courses", courses_path
-        - if current_user.isProf?
-            .pending-button
-                = link_to "Events pending your approval", pending_events_list_course_path(@course.id)
+        .pending-button
+            = link_to current_user.isProf? ? "Events pending your approval" : "Events submitted for approval", course_pending_events_path(@course.id)
+            - if current_user.isProf?
                 - @pending_events = count_pending_events(@course)
                 -if @pending_events>0
                     .counter#in-events
                         %span #{@pending_events}
-        -elsif !current_user.isProf?
-            .pending-button
-                = link_to "Events submitted for approval", pending_events_list_course_path(@course.id)
         %h1= @course.course_name
     .calendar-container
         .legend-container

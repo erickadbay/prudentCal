@@ -2,6 +2,17 @@ $('#modal').modal('hide');
 if (<%= current_user.isProf? %>){
     $('#calendar').fullCalendar('refetchEvents');
 }
+var message="Thank you adding your event to PrudentCAL. ";
+
+if (<%= @event.private %>){
+    message += "This event will only be visible to you.";
+}else if (<%= current_user.isProf? %>){
+    message += "Your event will now be visible to everyone enrolled in this course.";
+}else{
+    message += "Your event was sent to your Professor for approval.";
+}
+
+$('#success_banner h3').text(message);
 
 $('#success_banner').fadeIn(700, function(){
     setTimeout(function(){
