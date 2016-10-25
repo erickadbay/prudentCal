@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-    #helper EventsHelper
+    before_action :authenticate_user!
     before_action :find_course
     before_action :find_event, only: [:show, :edit, :update, :approve, :deny, :pending_event]
 
@@ -72,19 +72,25 @@ class EventsController < ApplicationController
 
     def approve
         @event.approve
-        @event.save
         respond_to do |format|
-            format.html { redirect_to course_pending_events_path(@course.id) }
-            format.js
+            if @event.save
+                format.html { redirect_to course_pending_events_path(@course.id) }
+                format.js
+            else
+                format.json { render json: @event.errors.full_messages, status: :unprocessable_entity }
+            end
         end
     end
 
     def deny
         @event.deny
-        @event.save
         respond_to do |format|
-            format.html { redirect_to course_pending_events_path(@course.id) }
-            format.js
+            if @event.save
+                format.html { redirect_to course_pending_events_path(@course.id) }
+                format.js
+            else
+                format.json { render json: @event.errors.full_messages, status: :unprocessable_entity }
+            end
         end
     end
 

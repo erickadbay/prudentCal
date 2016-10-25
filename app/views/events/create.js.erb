@@ -1,5 +1,5 @@
 $('#modal').modal('hide');
-if (<%= current_user.isProf? %>){
+if (<%= current_user.isProf? || @event.private %>){
     $('#calendar').fullCalendar('refetchEvents');
 }
 var message="Thank you adding your event to PrudentCAL. ";

@@ -1,7 +1,6 @@
 class CoursesController < ApplicationController
-    helper EventsHelper
-
-    before_action :find_course, only: [:show, :edit, :update, :destroy, :pendingEvents]
+    before_action :authenticate_user!
+    before_action :find_course, only: [:show, :edit, :update, :destroy]
     before_action :get_courses, only: [:index, :new]
 
     def index

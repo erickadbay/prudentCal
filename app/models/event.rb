@@ -2,14 +2,14 @@ class Event < ActiveRecord::Base
     belongs_to :course
     belongs_to :user
     has_many :comments, dependent: :destroy
-
-    @@approved = "Approved"
-    @@denied = "Denied"
-    @@pending = "Pending approval"
+    
+    APPROVED = "Approved"
+    DENIED = "Denied"
+    PENDING = "Pending approval"
 
     validates :title, presence: true
 
-    scope :approved, -> { where(status: @@approved) }
+    scope :approved, -> { where(status: APPROVED) }
     scope :not_my_private, -> (user) { where.not("user_id != ? AND private = ?", user.id, true) }
     scope :pending, -> { where(pending_decision: true) }
 
@@ -38,12 +38,12 @@ class Event < ActiveRecord::Base
 
     def approve
         self.pending_decision = false
-        self.status=@@approved
+        self.status=APPROVED
     end
 
     def deny
         self.pending_decision = false
-        self.status=@@denied
+        self.status=DENIED
     end
 
     #Assigns class names to events so that I can color code them in CSS
@@ -54,10 +54,10 @@ class Event < ActiveRecord::Base
 
     def decorate(user)
         if user.isProf? || self.isPrivate?
-            self.status = @@approved
+            self.status = APPROVED
             self.pending_decision=false
         else
-            self.status = @@pending
+            self.status = PENDING
         end
         self.set_className(user)
     end
