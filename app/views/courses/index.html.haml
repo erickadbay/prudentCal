@@ -1,6 +1,6 @@
 #welcome_message{:style => "display: none;"}
     - if user_signed_in?
-        - if current_user.isProf
+        - if current_user.isProf?
             %h3 Welcome! Prof. #{current_user.first_name} #{current_user.last_name}
         - else
             %h3 Welcome! #{current_user.first_name} #{current_user.last_name}
@@ -8,8 +8,8 @@
     - @courses.each do |course|
         .course
             %h1= link_to course.course_name,course_events_path(course.id)
-            - if current_user.isProf
-                - @pending_events = count_pending_events(course.id)
+            - if current_user.isProf?
+                - @pending_events = count_pending_events(course)
                 - if @pending_events >0
-                    .counter
+                    .counter{:title => "You have #{@pending_events} event(s) pending your approval"}
                         %span #{@pending_events}

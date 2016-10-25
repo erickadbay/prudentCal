@@ -2,8 +2,6 @@
 %html
 %head
 	%title PrudentCal | Collaborative calendar application
-	= include_gon(:init => true)
-	= Gon::Base.render_data({})
 	= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
 	= javascript_include_tag 'application', 'data-turbolinks-track' => true
 	= csrf_meta_tags
@@ -16,7 +14,7 @@
 			= link_to image_tag( 'prudentcal_logo.png'), root_path, id: "logo"
 			%nav
 				- if user_signed_in?
-					-if current_user.isProf
+					-if current_user.isProf?
 						= link_to "New Course", new_course_path
 					= link_to "Sign Out", destroy_user_session_path, method: :delete
 				- else

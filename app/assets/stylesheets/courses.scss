@@ -2,9 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#welcome_message, #after_create_message{
+#success_banner, #danger_banner, #welcome_message{
     width: 100%;
-    position: absolute;
+    position: fixed;
 
     opacity: 0.85;
     z-index: 999;
@@ -15,18 +15,17 @@
     }
 }
 
-#welcome_message{
+#success_banner, #welcome_message{
     background-color: $green;
 }
 
-#after_create_message{
-    background-color: $yellow;
+#danger_banner{
+    background-color: $red;
 }
 
 .courses{
 	padding-top: 170px;
     h1{
-        font-family: 'Brandon Grotesque Med', "Helvetica Neue", Helvetica, sans-serif;
         text-align: center;
     	padding-bottom: 10px;
 	}
@@ -41,4 +40,8 @@
     position: relative;
     display: table;
     margin: 0 auto;
+}
+
+.notfound{
+    text-align: center;
 }

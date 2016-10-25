@@ -1,24 +1,30 @@
 .wrapper_with_padding
-    .button-container
-        .back-btn
-            %i.fa.fa-long-arrow-left
+    .button-container.back-btn
+        %i.fa.fa-long-arrow-left
+        -if params[:action]=="pending_event"
+            =link_to "Back To #{current_user.isProf? ? "Pending Events" : "Submitted Events"}", course_pending_events_path(cookies[:course_id])
+        -else
             =link_to "Back To #{cookies[:course_name]}", course_events_path(cookies[:course_id])
     .event
         %h1= @event.title
         %p
             %strong Starts:
-            #{@event.start_time.to_formatted_s(:long) }
+            #{@event.start_time.to_formatted_s(:long)}
         %p
             %strong Ends:
             #{@event.start_time.to_formatted_s(:long)}
         %p
             %strong Posted by:
-            - if @event.user.isProf
+            - if @event.user.isProf?
                 Prof.
             #{@event.user.first_name} #{@event.user.last_name}
         %p
             %strong Course name:
             #{@course.course_name}
+        - if current_user.isProf? && params[:action]=="pending_event"
+            =link_to "", approve_course_event_path(@event.course_id, @event.id), class: "fa fa-check-circle-o", id: "approve-btn", title: "Approve"
+            =link_to "", deny_course_event_path(@event.course_id, @event.id), class: "fa fa-times-circle-o", id: "deny-btn", title: "Deny"
         - if @event.user.id==current_user[:id]
             =link_to "Edit", edit_course_event_path(@event.course, @event)
+        - if @event.user.id==current_user[:id] || current_user.isProf?
             =link_to "Delete", course_event_path(@event.course, @event), method: :delete, data: {confirm: "Are you sure?"}

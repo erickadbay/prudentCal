@@ -1,8 +1,7 @@
 class CoursesController < ApplicationController
-    before_action :find_course, only: [:show, :edit, :update, :destroy, :pending_events_list]
+    before_action :authenticate_user!
+    before_action :find_course, only: [:show, :edit, :update, :destroy]
     before_action :get_courses, only: [:index, :new]
-
-    helper EventsHelper
 
     def index
     end
@@ -17,26 +16,19 @@ class CoursesController < ApplicationController
 
     def create
         @course = Course.new(course_params)
-        @users=User.where(:id=>params[:students])
+        @users=User.where(:id => params[:students])
         @course.user_id=current_user.id if current_user
         @course.users << @users
         if @course.save
-            redirect_to @course
+            redirect_to course_events_path(@course)
         else
             render 'new'
         end
     end
 
-    def pending_events_list
-        if current_user.isProf
-            @pending_events_list = @course.events.where("pending_decision = ?", true)
-        else
-            @pending_events_list = Event.where("user_id = ?", current_user.id)
-        end
-    end
     private
     def find_course
-        @course=Course.includes(:events).find(params[:id])
+        @course=Course.find(params[:id])
     end
 
     def course_params

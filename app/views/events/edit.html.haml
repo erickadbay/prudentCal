@@ -1,3 +1,7 @@
-.edit-event-form.form
-    %h1 Edit your event
-    = render 'formedit'
+.wrapper_with_padding
+    .back-btn
+        %i.fa.fa-long-arrow-left
+        =link_to "Back To Event", course_event_path(@course.id, @event.id)
+    .form
+        %h1 Edit your event
+        = render 'formedit'

@@ -10,9 +10,8 @@ Rails.application.routes.draw do
             get 'deny'
           end
       end
-      member do
-          get 'pending_events_list'
-      end
+      get 'pendingEvents', to: 'events#pending_events', as: 'pending_events'
+      get 'pendingEvents/:id', to: 'events#pending_event', as: 'pending_event'
     end
 
     authenticated :user do

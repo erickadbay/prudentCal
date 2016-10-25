@@ -1,8 +1,8 @@
-= simple_form_for @event,validate: true, remote: true, url: course_events_path do |f|
+= simple_form_for @event, validate: true, remote: true, url: course_events_path do |f|
     #title_field
         = f.input :title, class: "first_input"
     .form-fields
         = f.input :start_time, label: 'Starts: '
         = f.input :end_time, label: 'Ends: '
         = f.input :private, label: 'Private event?'
-        = f.button :submit, class: "button", id: "submitbtn"
+        = f.button :submit, class: "button", id: "submit-btn"

@@ -1,1 +1,6 @@
 $("#<%= @event.id %>").slideUp();
+$('#danger_banner').fadeIn(700, function(){
+    setTimeout(function(){
+        $('#danger_banner').fadeOut(700);
+    }, 2000);
+});

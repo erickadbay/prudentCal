@@ -36,13 +36,13 @@ gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 gem 'jquery-turbolinks'
 gem 'client_side_validations-simple_form', '~> 3.2', '>= 3.2.3'
-gem "rspec-rails", :group => [:test, :development]
-gem 'gon'
+gem 'will_paginate', '~> 3.1.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'railroady'
+  gem "rspec-rails"
 end
 
 group :development do
@@ -53,6 +53,7 @@ group :development do
   gem 'spring'
   gem 'guard'
   gem 'guard-livereload', '~> 2.5', require: false
+  gem 'bullet'
 end
 
 group :test do
